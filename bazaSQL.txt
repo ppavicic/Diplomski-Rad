@@ -1,0 +1,95 @@
+CREATE TABLE PLACE
+(
+  idPlace SERIAL NOT NULL,
+  name VARCHAR(200) NOT NULL,
+  postalCode INT NOT NULL,
+  PRIMARY KEY (idPlace)
+);
+
+CREATE TABLE SCHOOL
+(
+  idSchool SERIAL NOT NULL,
+  name VARCHAR(200) NOT NULL,
+  idPlace INT NOT NULL,
+  PRIMARY KEY (idSchool),
+  FOREIGN KEY (idPlace) REFERENCES PLACE(idPlace)
+);
+
+CREATE TABLE TEACHER
+(
+  idTeacher SERIAL NOT NULL,
+  firstName VARCHAR(50) NOT NULL,
+  lastName VARCHAR(50) NOT NULL,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(30) NOT NULL,
+  PRIMARY KEY (idTeacher)
+);
+
+CREATE TABLE GRADE
+(
+  idGrade SERIAL NOT NULL,
+  department VARCHAR(5) NOT NULL,
+  idTeacher INT NOT NULL,
+  idSchool INT NOT NULL,
+  PRIMARY KEY (idGrade),
+  FOREIGN KEY (idTeacher) REFERENCES TEACHER(idTeacher),
+  FOREIGN KEY (idSchool) REFERENCES SCHOOL(idSchool)
+);
+
+CREATE TABLE STUDENT
+(
+  idStudent SERIAL NOT NULL,
+  firstName VARCHAR(50) NOT NULL,
+  lastName VARCHAR(50) NOT NULL,
+  idGrade INT NOT NULL,
+  PRIMARY KEY (idStudent),
+  FOREIGN KEY (idGrade) REFERENCES GRADE(idGrade)
+);
+
+CREATE TABLE TASK
+(
+  idTask SERIAL NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  question VARCHAR(2500) NOT NULL,
+  hint VARCHAR(1000) NOT NULL,
+  fillIn VARCHAR(200),
+  answer1 VARCHAR(200),
+  answer2 VARCHAR(200),
+  audio VARCHAR(1000),
+  tableJSON VARCHAR(2500),
+  PRIMARY KEY (idTask)
+);
+
+CREATE TABLE EXERCISE
+(
+  idExercise SERIAL NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  start BOOLEAN NOT NULL,
+  PRIMARY KEY (idExercise)
+);
+
+CREATE TABLE ExerciseTask
+(
+  idTask INT NOT NULL,
+  idExercise INT NOT NULL,
+  PRIMARY KEY (idTask, idExercise),
+  FOREIGN KEY (idTask) REFERENCES TASK(idTask),
+  FOREIGN KEY (idExercise) REFERENCES EXERCISE(idExercise)
+);
+
+CREATE TABLE LOGS
+(
+  idLog SERIAL NOT NULL,
+  createdDate TIMESTAMP NOT NULL,
+  duration INT NOT NULL,
+  correct BOOLEAN NOT NULL,
+  studentAnswer VARCHAR(2500),
+  correctAnswer VARCHAR(2500),
+  idStudent INT NOT NULL,
+  idExercise INT NOT NULL,
+  idTask INT NOT NULL,
+  FOREIGN KEY (idStudent) REFERENCES STUDENT(idStudent),
+  FOREIGN KEY (idExercise) REFERENCES EXERCISE(idExercise),
+  FOREIGN KEY (idTask) REFERENCES TASK(idTask),
+  PRIMARY KEY (idLog)
+);
