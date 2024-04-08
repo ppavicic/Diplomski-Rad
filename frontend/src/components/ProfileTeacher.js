@@ -131,9 +131,9 @@ function ProfileTeacher() {
             <main className="content">
                 {showSidebar &&
                     <aside className="sidebar-navbar">
-                        <button className="option-button" onClick={handleStudent}>Add Task</button>
-                        <button className="option-button" onClick={handleTask}>Add Exercise</button>
-                        <button className="option-button" onClick={handleExercise}>Add Student</button>
+                        <button className="option-button" onClick={handleStudent}>Add Student</button>
+                        <button className="option-button" onClick={handleTask}>Add Task</button>
+                        <button className="option-button" onClick={handleExercise}>Add Exercise</button>
                     </aside>
                 }
 

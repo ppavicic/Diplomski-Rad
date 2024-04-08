@@ -56,7 +56,6 @@ router.post('/getGrades', async function (req, res) {
 router.post('/getStudents', async function (req, res) {
     try {
         const cookie = req.cookies['jwt']
-        console.log(cookie)
         const claims = jwt.verify(cookie, process.env.JWT_SECRET_KEY);
 
         if (!claims) {
@@ -85,7 +84,6 @@ router.post('/getStudents', async function (req, res) {
 router.get('/getTasks', async function (req, res) {
     try {
         const cookie = req.cookies['jwt']
-        console.log(cookie)
         const claims = jwt.verify(cookie, process.env.JWT_SECRET_KEY);
 
         if (!claims) {
@@ -114,7 +112,6 @@ router.get('/getTasks', async function (req, res) {
 router.get('/getExercises', async function (req, res) {
     try {
         const cookie = req.cookies['jwt']
-        console.log(cookie)
         const claims = jwt.verify(cookie, process.env.JWT_SECRET_KEY);
 
         if (!claims) {

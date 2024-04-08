@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginTeacher from "./components/LoginTeacher";
 import LoginStudent from "./components/LoginStudent";
 import ProfileTeacher from "./components/ProfileTeacher";
+import AddTask from "./components/AddTask";
 import Exercise from "./components/Exercise";
 import TextToSpeechComponent from "./components/TextToSpeechComponent";
 import PrivateRoutes from "./components/Private";
@@ -17,6 +18,7 @@ function App() {
           <Route path="/loginTeacher" element={<LoginTeacher />} />
           <Route path="/profileTeacher" element={<PrivateRoutes> <ProfileTeacher /> </PrivateRoutes>} exact />
           <Route path="/exercise" element={<PrivateRoutes> <Exercise /> </PrivateRoutes>} exact />
+          <Route path="/addTask" element={ <AddTask /> } exact />
         </Routes>
       </Router>
     </div>
