@@ -115,8 +115,15 @@ function ProfileTeacher() {
             {/*<td>{student.idstudent}</td>*/}
             <td>{student.firstname}</td>
             <td>{student.lastname}</td>
-        </tr>
-    )
+        </tr>)
+
+    let j = 0
+    const listTasks = tasks.map(task =>
+        <tr key={j++}>
+            <td>{task.type}</td>
+            <td>{task.question}</td>
+            <td>{task.fillin}</td>
+        </tr>)
 
     return (
         <div style={{ height: '100vh' }}>
@@ -139,7 +146,7 @@ function ProfileTeacher() {
 
                 <section className="tasks-section" style={{ marginTop: '10px' }}>
                     <h2>ZADACI</h2>
-                    {/* Display tasks here */}
+                    {listTasks}
                     {tasks.length === 0 && <p>Trenutno nema zadataka</p>}
                 </section>
 

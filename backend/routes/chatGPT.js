@@ -26,7 +26,11 @@ router.post('/', async function (req, res) {
     Zadatak je tipa nadopunjavanja pa bi mi trebao izgenerirat rečenicu u kojoj će korisnici morat unijet ispravnu riječ. 
     Odgovori mi u obliku "pitanje:..";hint:...;fillin:...;". Bitno je da u odgovoru staviš ";" kako sam ti rekao
     jer kasnije radim split funkciju pomoću njih i ništa dodatno ne odgovaraj osim toga. ${req.body.prompt}`;
+    } else if (req.body.type === 'diktat') {
+      prompt = `${req.body.prompt} Hoću da mi vratiš odgovor u obliku JSON. Tako da mi tekst za diktat bude naveden pod atributom "text". 
+      Koristi hrvatski jezik i pravopis.`
     }
+
     const response = await openai.chat.completions.create({
       messages: [{
         role: "system",

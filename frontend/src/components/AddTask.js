@@ -4,6 +4,7 @@ import "../styles/ProfilePage.css";
 import axios from 'axios';
 import { URL } from "./Constants";
 import FillInTask from "./FillInTask";
+import DictationTask from "./DictationTask";
 
 function AddTask() {
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ function AddTask() {
                 <h2>Stvori novi zadatak</h2>
                 <button className="button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
             </nav>
+            {type === "diktat" && <DictationTask />}
             {type === "nadopuna" && <FillInTask />}
         </div>
     );
