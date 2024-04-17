@@ -7,6 +7,9 @@ function FillInTask() {
     const [taskInput, setTaskInput] = useState("");
     const [result, setResult] = useState(false);
     const [showResult, setShowResult] = useState(false);
+    const [fillin, setFillin] = useState("");
+    const [hint, setHint] = useState("");
+    const [question, setQuestion] = useState("");
 
     const handleSubmit = async () => {
         try {
@@ -17,7 +20,12 @@ function FillInTask() {
                 withCredentials: true
             });
             console.log(response.data.result);
-            setResult(response.data.result);
+            const textJSON = JSON.parse(response.data.result)
+            let text = textJSON.question + " Riječi za unijeti: " + textJSON.fillin + ". HINT: " + textJSON.hint
+            setFillin(textJSON.fillin);
+            setHint(textJSON.hint);
+            setQuestion(textJSON.question);
+            setResult(text);
             setShowResult(true);
         } catch (error) {
             console.error(error);
@@ -31,9 +39,9 @@ function FillInTask() {
             console.log("part1" + resultParts[0], resultParts[1])
             const data = {
                 type: 'nadopuna',
-                fillin: resultParts[0].split(':')[1].trim(),
-                hint: resultParts[1].split(':')[1].trim(),
-                question: "Nadopuni sljedeću rečenicu."
+                fillin: fillin,
+                hint: hint,
+                question: question
             }
             const response = await axios.post(`${URL}/task/save`, data, {
                 headers: { "Content-Type": "application/json" },
@@ -51,7 +59,7 @@ function FillInTask() {
         <div className="">
             <div className="instructions">
                 <h2>Upute:</h2>
-                <p>Ovo je alat za izradu zadataka uz pomoć AI! Umjetna inteligencija može vam pomoći u generiranju zadatka na temelju vašeg upita. Bitno je da odgovor bude u obliku: "pitanje:...";hint:...;fillin:...;".
+                <p>Ovo je alat za izradu zadataka uz pomoć AI! Umjetna inteligencija može vam pomoći u generiranju zadatka na temelju vašeg upita.
                  Unesite npr. "Izgeneriraj mi smislenu rečenicu koja sadrži riječ kuća"</p>
             </div>
             {!showResult && (

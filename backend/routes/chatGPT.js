@@ -23,8 +23,8 @@ router.post('/', async function (req, res) {
     let prompt = "";
     if (req.body.type === 'nadopuna') {
       prompt = `Pravim zadatak za provjeru pravopisa iz hrvatskog jezika. Zadatak je tipa nadopunjavanja pa bi mi trebao izgenerirat rečenicu u kojoj će korisnici morat unijet ispravnu riječ. 
-    Odgovori mi u obliku "pitanje:..";hint:...;fillin:...;". Bitno je da u odgovoru staviš ";" kako sam ti rekao
-    jer kasnije radim split funkciju pomoću njih i ništa dodatno ne odgovaraj osim toga. ${req.body.prompt}`;
+      Hoću da mi vratiš odgovor u obliku JSON. Tako da mi generirana rečenica bude navedena pod atributom "question". Riječ koju će trebati nadopunit pod atributom "fillin".
+      Pomoć pod atributom "hint". Koristi hrvatski jezik i pravopis. Ne koristi navodnike u hintu.${req.body.prompt}`;
     } else if (req.body.type === 'diktat') {
       prompt = `${req.body.prompt} Hoću da mi vratiš odgovor u obliku JSON. Tako da mi tekst za diktat bude naveden pod atributom "text". 
       Koristi hrvatski jezik i pravopis.`
