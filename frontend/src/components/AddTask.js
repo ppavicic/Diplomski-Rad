@@ -5,6 +5,7 @@ import axios from 'axios';
 import { URL } from "./Constants";
 import FillInTask from "./FillInTask";
 import DictationTask from "./DictationTask";
+import SelectionTask from "./SelectionTask";
 
 function AddTask() {
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ function AddTask() {
             </nav>
             {type === "diktat" && <DictationTask />}
             {type === "nadopuna" && <FillInTask />}
+            {type === "odabir" && <SelectionTask />}
         </div>
     );
 }

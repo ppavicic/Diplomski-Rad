@@ -12,13 +12,13 @@ function DictationTask() {
     const audioRef = useRef(null);
 
     const handleSave = async () => {
+        console.log(audioRef.current.src);
         try {
             const data = {
                 type: 'diktat',
-                audio: audioRef,
+                audio: audioRef.current.src,
                 hint: 'none',
-                question: "Pokreni audio i u odabrano polje napiši diktat.",
-                dictationText: result
+                question: result,
             }
             const response = await axios.post(`${URL}/task/save`, data, {
                 headers: { "Content-Type": "application/json" },
@@ -68,7 +68,6 @@ function DictationTask() {
                 model_id: "eleven_multilingual_v2"
             })
         };
-        setShowSaveBtn(true);
 
         try {
             const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/adxhr4Ei7ASJ3Cz7fxwX?output_format=mp3_44100', options);
@@ -76,11 +75,7 @@ function DictationTask() {
             const audioURL = window.URL.createObjectURL(audioBlob);
             audioRef.current.src = audioURL;
             console.log(audioURL)
-
-            // Handle when audio finishes playing
-            /*audio.onended = () => {
-                URL.revokeObjectURL(audioURL);
-            };*/
+            setShowSaveBtn(true);
         } catch (error) {
             console.error(error);
         }

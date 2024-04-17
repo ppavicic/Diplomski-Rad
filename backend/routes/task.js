@@ -13,6 +13,8 @@ router.post('/save', async function (req, res) {
             message: 'Unauthenticated - Cookie invalid'
           })
         }
+
+        console.log(req.body);
     
         const sql = `INSERT INTO task (type, question, hint, fillin, answer1, answer2, audio, tableJSON)
         VALUES ('` + req.body.type + `', '` + req.body.question + `', '` + req.body.hint + `', '` + req.body.fillin + `', '`
