@@ -16,7 +16,7 @@ router.post('/save', async function (req, res) {
 
         console.log(req.body);
     
-        const sql = `INSERT INTO task (type, question, hint, fillin, answer1, answer2, audio, tableJSON)
+        const sql = `INSERT INTO task (type, question, hint, fillin, answer1, answer2, audio, tablejson)
         VALUES ('` + req.body.type + `', '` + req.body.question + `', '` + req.body.hint + `', '` + req.body.fillin + `', '`
             + req.body.answer1 + `', '` + req.body.answer2 + `', '` + req.body.audio + `', '` + req.body.tableJSON + `')`;
         const result = await db.query(sql, []);

@@ -6,6 +6,7 @@ import { URL } from "./Constants";
 import FillInTask from "./FillInTask";
 import DictationTask from "./DictationTask";
 import SelectionTask from "./SelectionTask";
+import TableTask from "./TableTask";
 
 function AddTask() {
     const navigate = useNavigate();
@@ -41,6 +42,7 @@ function AddTask() {
             {type === "diktat" && <DictationTask />}
             {type === "nadopuna" && <FillInTask />}
             {type === "odabir" && <SelectionTask />}
+            {type === "tablica" && <TableTask />}
         </div>
     );
 }

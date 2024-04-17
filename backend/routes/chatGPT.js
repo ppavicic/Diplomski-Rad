@@ -32,6 +32,10 @@ router.post('/', async function (req, res) {
       prompt = `Generiraj mi rečenicu koja sadrži ispravnu riječ: ${req.body.prompt}. Također od te riječi napravi pravopisno krivu riječ, npr. zamijeni ć sa č, ije sa je (umjesto cvijet cvjet) i slično, itd. 
       Hoću da mi vratiš odgovor u obliku JSON. Tako da mi generirana rečenica bude navedena pod atributom "pitanje". Ispravno navedena riječ pod atributom "odgovor1". Krivo navedena riječ pod atributom "odgovor2".
       Pomoć pod atributom "hint". Koristi hrvatski jezik i pravopis. Ne koristi navodnike u hintu.`
+    } else if (req.body.type === 'tablica') {
+      prompt = `Generiraj mi niz riječi sa slovima: ${req.body.prompt}. Za svako slovo generiraj po 5 riječi. Od tih riječi napravi tablicu tako da su u jednom stupcu riječi sa jednim slovom
+      a u drugom riječi sa drugim slovom. Hoću da mi vratiš odgovor u obliku JSON. Tako da mi riječi iz prvog stupca budu pod atributom "stupac1". Riječi iz drugog stupca pod atributom "stupac2".
+      Pomoć pod atributom "hint". Koristi hrvatski jezik i pravopis. Ne koristi navodnike u hintu.`
     }
 
     const response = await openai.chat.completions.create({
