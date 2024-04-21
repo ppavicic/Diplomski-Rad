@@ -8,6 +8,10 @@ function AddExercise() {
     const [tasks, setTasks] = useState([]);
     const [selectedTasks, setSelectedTasks] = useState([]);
     const [showSelected, setShowSelected] = useState(false);
+    const [exerciseName, setExerciseName] = useState("");
+    const [exerciseStart, setExerciseStart] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         getTasks();
@@ -18,7 +22,6 @@ function AddExercise() {
             headers: { "Content-Type": "application/json" },
             withCredentials: true
         });
-        console.log(tasks);
         setTasks(response.data.tasks);
     };
 
@@ -32,9 +35,42 @@ function AddExercise() {
         const removedTask = selectedTasks.find(task => task.idtask === taskId);
         setSelectedTasks(prevSelectedTasks => prevSelectedTasks.filter(task => task.idtask !== taskId));
         setTasks(prevTasks => [...prevTasks, removedTask]);
-        console.log(selectedTasks.length )
         if (selectedTasks.length === 1) {
             setShowSelected(false);
+        }
+    };
+
+    const handleStartExerciseChange = () => {
+        setExerciseStart(prevStart => !prevStart);
+    };
+
+    const handleSave = async () => {
+        console.log(exerciseName);
+        console.log(selectedTasks)
+        if (selectedTasks.length === 0) {
+            setError(true)
+            setErrorMsg("Niste odabrali nijedan zadatak!");
+        } else {
+            try {
+                const data = {
+                    name: exerciseName,
+                    start: exerciseStart,
+                    tasks: selectedTasks,
+                }
+                const response = await axios.post(`${URL}/exercise/save`, data, {
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: true
+                });
+
+                if (response.data.success) {
+                    navigate("/profileTeacher");
+                } else {
+                    setError(true);
+                    setErrorMsg(response.data.message);
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
@@ -77,6 +113,15 @@ function AddExercise() {
                 <h2>Stvori novu vježbu</h2>
                 <button className="button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
             </nav>
+            {error &&
+                <div>
+                    {errorMsg}
+                </div>}
+            <div>
+                <input type="text" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} placeholder="Unesite ime vježbe" />
+                <input type="checkbox" checked={exerciseStart} onChange={() => setExerciseStart(prev => !prev)} />
+                <button className="button" onClick={handleSave}>Spremi</button>
+            </div>
             {showSelected &&
                 <div>
                     <h2>Odabrani zadaci</h2>

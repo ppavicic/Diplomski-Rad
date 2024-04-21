@@ -145,9 +145,11 @@ function ProfileTeacher() {
                 }
 
                 <section className="tasks-section" style={{ marginTop: '10px' }}>
-                    <h2>ZADACI</h2>
-                    {listTasks}
-                    {tasks.length === 0 && <p>Trenutno nema zadataka</p>}
+                    <div>
+                        <h2>ZADACI</h2>
+                        {listTasks}
+                        {tasks.length === 0 && <p>Trenutno nema zadataka</p>}
+                    </div>
                 </section>
 
                 <section className="exercises-section">
