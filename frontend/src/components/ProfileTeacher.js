@@ -44,6 +44,7 @@ function ProfileTeacher() {
                 headers: { "Content-Type": "application/json" },
                 withCredentials: true
             });
+            console.log(response3.data.exercises)
             setExercises(response3.data.exercises);
         } catch (error) {
             console.error(error);
@@ -122,7 +123,20 @@ function ProfileTeacher() {
         <tr key={j++}>
             <td>{task.type}</td>
             <td>{task.question}</td>
+            <td>{task.hint}</td>
             <td>{task.fillin}</td>
+            <td>{task.answer1}</td>
+            <td>{task.answer2}</td>
+            <td>{task.audio}</td>
+            <td>{task.tablejson}</td>
+        </tr>)
+
+    let k = 0
+    const listExercises = exercises.map(exercise =>
+        <tr key={k++}>
+            <td>{exercise.idexercise}</td>
+            <td>{exercise.name}</td>
+            <td>{exercise.start ? 'True' : 'False'}</td>
         </tr>)
 
     return (
@@ -147,15 +161,44 @@ function ProfileTeacher() {
                 <section className="tasks-section" style={{ marginTop: '10px' }}>
                     <div>
                         <h2>ZADACI</h2>
-                        {listTasks}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tip</th>
+                                    <th>Pitanje</th>
+                                    <th>Hint</th>
+                                    <th>Nadopuna</th>
+                                    <th>Odgovor1</th>
+                                    <th>Odgovor2</th>
+                                    <th>Audio</th>
+                                    <th>Tablica</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listTasks}
+                            </tbody>
+                        </table>
                         {tasks.length === 0 && <p>Trenutno nema zadataka</p>}
                     </div>
                 </section>
 
                 <section className="exercises-section">
-                    <h2>VJEŽBE</h2>
-                    {/* Display exercises here */}
-                    {exercises.length === 0 && <p>Trenutno nema vježbi</p>}
+                    <div>
+                        <h2>VJEŽBE</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Ime vježbe</th>
+                                    <th>Pokreni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listExercises}
+                            </tbody>
+                        </table>
+                        {exercises.length === 0 && <p>Trenutno nema vježbi</p>}
+                    </div>
                 </section>
 
                 <section className="students-section">
@@ -163,7 +206,17 @@ function ProfileTeacher() {
                     <select value={grade} defaultValue={'default'} name="grade" className="input-container" aria-label="Default select example" onChange={handleGradeChange}>
                         {gradesList}
                     </select>
-                    {students.length > 0 && listStudents}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ime</th>
+                                <th>Prezime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {students.length > 0 && listStudents}
+                        </tbody>
+                    </table>
                     {students.length === 0 && <p>No students available.</p>}
                 </section>
             </main>

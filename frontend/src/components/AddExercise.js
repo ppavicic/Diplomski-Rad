@@ -119,7 +119,10 @@ function AddExercise() {
                 </div>}
             <div>
                 <input type="text" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} placeholder="Unesite ime vježbe" />
-                <input type="checkbox" checked={exerciseStart} onChange={() => setExerciseStart(prev => !prev)} />
+                <div>
+                    Postavi vježbu učenicima za vježbanje: 
+                    <input type="checkbox" checked={exerciseStart} onChange={() => setExerciseStart(prev => !prev)} />
+                </div>
                 <button className="button" onClick={handleSave}>Spremi</button>
             </div>
             {showSelected &&
