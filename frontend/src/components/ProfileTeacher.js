@@ -124,11 +124,11 @@ function ProfileTeacher() {
             <td>{task.type}</td>
             <td>{task.question}</td>
             <td>{task.hint}</td>
-            <td>{task.fillin}</td>
-            <td>{task.answer1}</td>
-            <td>{task.answer2}</td>
-            <td>{task.audio}</td>
-            <td>{task.tablejson}</td>
+            <td>{task.fillin === "undefined" ? "-" : task.fillin}</td>
+            <td>{task.answer1 === "undefined" ? "-" : task.answer1}</td>
+            <td>{task.answer2 === "undefined" ? "-" : task.answer2}</td>
+            <td>{task.audio === "undefined" ? "-" : task.audio}</td>
+            <td>{task.tablejson === "undefined" ? "-" : task.tablejson}</td>
         </tr>)
 
     let k = 0
@@ -168,8 +168,8 @@ function ProfileTeacher() {
                                     <th>Pitanje</th>
                                     <th>Hint</th>
                                     <th>Nadopuna</th>
-                                    <th>Odgovor1</th>
-                                    <th>Odgovor2</th>
+                                    <th>Odabir1</th>
+                                    <th>Odabir2</th>
                                     <th>Audio</th>
                                     <th>Tablica</th>
                                 </tr>

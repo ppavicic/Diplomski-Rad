@@ -8,6 +8,7 @@ const teacherProfileRouter = require('./routes/teacherProfile');
 const chatGPTRouter = require('./routes/chatGPT');
 const taskRouter = require('./routes/task');
 const exerciseRouter = require('./routes/exercise');
+const studentRouter = require('./routes/student');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/teacherProfile', teacherProfileRouter);
 app.use('/askAI', chatGPTRouter);
 app.use('/task', taskRouter);
 app.use('/exercise', exerciseRouter);
+app.use('/student', studentRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server listening on port ${port}`));
