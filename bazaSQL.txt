@@ -81,7 +81,7 @@ CREATE TABLE LOGS
 (
   idLog SERIAL NOT NULL,
   createdDate TIMESTAMP NOT NULL,
-  duration INT NOT NULL,
+  duration VARCHAR(30) NOT NULL,
   correct BOOLEAN NOT NULL,
   studentAnswer VARCHAR(2500),
   correctAnswer VARCHAR(2500),
@@ -90,6 +90,5 @@ CREATE TABLE LOGS
   idTask INT NOT NULL,
   FOREIGN KEY (idStudent) REFERENCES STUDENT(idStudent),
   FOREIGN KEY (idExercise) REFERENCES EXERCISE(idExercise),
-  FOREIGN KEY (idTask) REFERENCES TASK(idTask),
   PRIMARY KEY (idLog)
 );

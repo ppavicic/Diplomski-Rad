@@ -19,6 +19,7 @@ const LoginStudent = () => {
 
     useEffect(() => {
         getSchools();
+        getExercise();
     }, []);
 
     const getSchools = async () => {
@@ -29,6 +30,26 @@ const LoginStudent = () => {
 
             console.log(response.data.schools);
             setSchools(response.data.schools);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const getExercise = async () => {
+        try {
+            const response = await axios.get(`${URL}/exercise/getSettedExercise`, {
+                withCredentials: false
+            });
+
+            let exerciseJSON = JSON.parse(response.data.exercise);
+            console.log(JSON.parse(response.data.exercise));
+            const exercise = {
+                "idexercise": exerciseJSON.idexercise,
+                "name": exerciseJSON.name,
+                "tasks": exerciseJSON.tasks,
+                "solvedCounter": 0
+            }
+            localStorage.setItem('exercise', JSON.stringify(exercise))
         } catch (error) {
             console.error(error);
         }
@@ -79,6 +100,23 @@ const LoginStudent = () => {
                 idschool: school,
             };
             localStorage.setItem('user', JSON.stringify(user));
+
+            let exercise = JSON.parse(localStorage.getItem('exercise'))
+            let log = {
+                idexercise: exercise.idexercise,
+                idtask: 0,
+                idstudent: student,
+                correctAnswer: 'correctAnswer',
+                studentAnswer: 'studentAnswer',
+                correct: false
+            }
+            axios.post(URL + '/exercise/sendLog', log, { withCredentials: false })
+                .then(result => {
+                    console.log(result.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
             navigate("/exercise");
         } catch (error) {
             console.error(error);
