@@ -32,4 +32,33 @@ router.post('/save', async function (req, res) {
     }
 })
 
+router.post('/getStudent', async function (req, res) {
+    try {
+        rows = await getStudentById(req.body.idstudent);
+
+        if (rows) {
+            res.json({
+                student: rows
+            })
+        } else {
+            res.json({
+                err: 'Greška pri dohvatu studenta'
+            })
+        }
+    } catch (err) {
+        throw err
+    }
+})
+
+getStudentById = async function (idstudent) {
+    const sql = `SELECT * FROM student WHERE idstudent = ` + idstudent;
+    try {
+        const result = await db.query(sql, []);
+        return result.rows
+    } catch (err) {
+        console.log(err);
+        throw err
+    }
+}
+
 module.exports = router;

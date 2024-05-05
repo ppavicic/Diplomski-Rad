@@ -1,0 +1,137 @@
+.centerContent {
+    margin: 0 20%;
+    background-color: antiquewhite;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 2px solid grey;
+    font-family: 'Schoolbell', cursive;
+}
+
+.questionContainer {
+    border-bottom: 1px solid grey;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.question {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hint-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hintBtn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.hintBtn:hover {
+    background-color: #e0e0e0;
+    color: #000;
+    border-color: #bbb;
+}
+
+.dictationInput {
+    width: 100% !important;
+}
+
+.skipBtn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.skipBtn::before {
+    content: "\2192";
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+}
+
+.audioContent {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.audioBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.audioBtn:hover {
+    background-color: #0056b3;
+}
+
+.audioBarContainer {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.audioBar {
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.correct {
+    background-color: #d4edda; 
+    border: 1px solid #a6d8b2;
+    color: #5c9c6b;
+    border-radius: .25rem;
+    font-weight: bold;
+    padding: .75rem 1.25rem;
+}
+.wrong {
+    background-color: #f8d7da;
+    border: 1px solid #f6bec4; 
+    color: #c96871;
+    border-radius: .25rem; 
+    padding: .75rem 1.25rem;
+    font-weight: bold;
+}

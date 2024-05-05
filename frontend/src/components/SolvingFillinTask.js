@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styles/Exercise.css";
 
 const SolvingFillinTask = ({ idtask, question, hint, fillin, nextTask, sendLog }) => {
    const [showHint, setShowHint] = useState(false);
@@ -6,6 +7,7 @@ const SolvingFillinTask = ({ idtask, question, hint, fillin, nextTask, sendLog }
    const [replacedQuestion, setReplacedQuestion] = useState('');
    const [correctFlag, setCorrectFlag] = useState(false);
    const [wrongFlag, setWrongFlag] = useState(false);
+   let [currentTaskIndex, setCurrentTaskIndex] = useState(0)
 
    useEffect(() => {
       const replaced = question.replace(
@@ -13,6 +15,9 @@ const SolvingFillinTask = ({ idtask, question, hint, fillin, nextTask, sendLog }
          '____________'
       );
       setReplacedQuestion(replaced);
+      const exercise = JSON.parse(localStorage.getItem("exercise"));
+      let solvedCounter = exercise.solvedCounter
+      setCurrentTaskIndex(++solvedCounter)
    }, [question, fillin]);
 
    const toggleHint = () => {
@@ -42,23 +47,29 @@ const SolvingFillinTask = ({ idtask, question, hint, fillin, nextTask, sendLog }
    };
 
    return (
-      <div>
-         <h2>Nadopuni rečenicu s ispravnom riječju.</h2>
-         <button onClick={handleSkip}>Skip</button>
-         <div>
-            <div className="my-3">
-               <button className="btn btn-warning btn-sm mx-3" onClick={toggleHint} aria-pressed={showHint} autoComplete="off"> HINT </button>
+      <div className='content centerContent'>
+         <div className='questionContainer'>
+            <h2 className='question'>{currentTaskIndex}. Nadopuni rečenicu s ispravnom riječju.</h2>
+            <button className='skipBtn' onClick={handleSkip}></button>
+         </div>
+         <div className='fillin-container'>
+            <div className="hint-container">
+               <button className='hintBtn' onClick={toggleHint} aria-pressed={showHint} autoComplete="off"> HINT </button>
                {showHint && <div>{hint}</div>}
             </div>
             {replacedQuestion}
-            <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Ovdje unesite odgovor" />
+            <div className="fillin-input-container">
+               <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Ovdje unesite odgovor" />
+            </div>
          </div>
-         <button onClick={handleSubmit}>Odgovori</button>
+         <div className="button-container">
+            <button className="button" onClick={handleSubmit}>ODGOVORI</button>
+         </div>
          {
-            correctFlag && <div>   Tocan odgovor   </div>
+            correctFlag && <div className="correct">   Točan odgovor   </div>
          }
          {
-            wrongFlag && <div>   Netocan odgovor   </div>
+            wrongFlag && <div className="wrong">   Netočan odgovor   </div>
          }
       </div>
    );

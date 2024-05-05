@@ -1,0 +1,25 @@
+.tw-container {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid grey;
+    padding-bottom: 2%;
+}
+
+.word-container {
+    width: 20%;
+    border-right: 1px solid grey;
+}
+
+.table-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.column {
+    height: 100%;
+}
+
+.th {
+    border-bottom: 3px solid grey;
+}

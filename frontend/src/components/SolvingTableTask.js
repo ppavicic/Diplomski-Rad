@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import "../styles/Exercise.css";
+import "../styles/TableTask.css";
 
 const SolvingTableTask = ({ idtask, question, hint, tablejson, nextTask, sendLog }) => {
    const [draggedItem, setDraggedItem] = useState(null);
@@ -6,10 +8,17 @@ const SolvingTableTask = ({ idtask, question, hint, tablejson, nextTask, sendLog
    const [showHint, setShowHint] = useState(false);
    const [showIncorrectNumber, setShowIncorrectNumber] = useState(false);
    const [correctFlag, setCorrectFlag] = useState(false);
+   let [currentTaskIndex, setCurrentTaskIndex] = useState(0)
 
    const parsedTableJson = JSON.parse(tablejson);
    const [remainingWords, setRemainingWords] = useState(Object.values(parsedTableJson).flat());
    const [incorrectWords, setIncorrectWords] = useState(0);
+
+   useEffect(() => {
+      const exercise = JSON.parse(localStorage.getItem("exercise"));
+      let solvedCounter = exercise.solvedCounter
+      setCurrentTaskIndex(++solvedCounter)
+   }, []);
 
    const toggleHint = () => {
       setShowHint(prevShowHint => !prevShowHint);
@@ -62,7 +71,7 @@ const SolvingTableTask = ({ idtask, question, hint, tablejson, nextTask, sendLog
             onDragOver={(e) => handleDragOver(e)}
             onDrop={(e) => handleDrop(e, column)}
          >
-            <h3>{column}</h3>
+            <h3 className='th'>{column}</h3>
             {items[column] !== undefined && items[column].length !== 0 ? (
                items[column].map((item, index) => (
                   <div
@@ -118,34 +127,40 @@ const SolvingTableTask = ({ idtask, question, hint, tablejson, nextTask, sendLog
    //console.log('Current remainingWords state: ', remainingWords);
 
    return (
-      <div>
-         <h2>{question}</h2>
-         <button onClick={handleSkip}>Skip</button>
-         <div className="my-3">
-            <button className="btn btn-warning btn-sm mx-3" onClick={toggleHint} aria-pressed={showHint} autoComplete="off"> HINT </button>
+      <div className='content centerContent'>
+         <div className='questionContainer'>
+            <h2 className='question'>{currentTaskIndex}. {question}</h2>
+            <button className='skipBtn' onClick={handleSkip}></button>
+         </div>
+         <div className="hint-container">
+            <button className='hintBtn' onClick={toggleHint} aria-pressed={showHint} autoComplete="off"> HINT </button>
             {showHint && <div>{hint}</div>}
          </div>
-         <div className="table-container">
-            {Object.entries(parsedTableJson).map(([column, items]) => (
-               renderColumnDropZone(column, columns)
-            ))}
+         <div className='tw-container'>
+            <div className="word-container">
+               <h3>RIJEČI</h3>
+               {shuffleArray(remainingWords).map((item, idx) => (
+                  <div
+                     key={idx}
+                     draggable
+                     onDragStart={e => handleDragStart(e, item)}
+                     className="drag-item"
+                  >
+                     {item}
+                  </div>
+               ))}
+            </div>
+            <div className="table-container">
+               {Object.entries(parsedTableJson).map(([column, items]) => (
+                  renderColumnDropZone(column, columns)
+               ))}
+            </div>
          </div>
-         <div className="word-container">
-            <h3>Words</h3>
-            {shuffleArray(remainingWords).map((item, idx) => (
-               <div
-                  key={idx}
-                  draggable
-                  onDragStart={e => handleDragStart(e, item)}
-                  className="drag-item"
-               >
-                  {item}
-               </div>
-            ))}
+         <div className="button-container">
+            <button className="button" onClick={handleSubmit}>ODGOVORI</button>
          </div>
-         <button onClick={handleSubmit}>Odgovori</button>
          {
-            showIncorrectNumber && <div>Total incorrect words: {incorrectWords}</div>
+            showIncorrectNumber && <div>Broj netočno postavljenih riječi: {incorrectWords}</div>
          }
 
          {

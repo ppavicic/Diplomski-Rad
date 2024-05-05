@@ -54,7 +54,7 @@ function DictationTask() {
         const options = {
             method: 'POST',
             headers: {
-                'xi-api-key': 'c3f49f7cb377b35e8e545f0dd495a25f',
+                'xi-api-key': 'ddc8e54f6d8a0c8ac9bdbf80ce5783ad',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -72,6 +72,7 @@ function DictationTask() {
         try {
             const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/adxhr4Ei7ASJ3Cz7fxwX?output_format=mp3_44100', options);
             const audioBlob = await response.blob();
+
             const audioURL = window.URL.createObjectURL(audioBlob);
             audioRef.current.src = audioURL;
             console.log(audioURL)

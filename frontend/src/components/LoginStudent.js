@@ -92,6 +92,21 @@ const LoginStudent = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         //let exercise = JSON.parse(localStorage.getItem('exercise'));
+        try {
+            const data = {
+                idstudent: student,
+            };
+            const response = await axios.post(`${URL}/student/getStudent`, data, {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: false
+            });
+
+            if (response) {
+                localStorage.setItem('studentName', JSON.stringify(response.data.student[0].firstname + ' ' + response.data.student[0].lastname));
+            }
+        } catch (error) {
+            console.error(error);
+        }
 
         try {
             const user = {

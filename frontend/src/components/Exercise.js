@@ -13,17 +13,14 @@ function Exercise() {
     const [exerciseExist, setExerciseExist] = useState(false);
     const [exerciseName, setExerciseName] = useState("");
     const [tasks, setTasks] = useState([]);
-    const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [currentTask, setCurrentTask] = useState(null);
-    const [stopExercise, setStopExercise] = useState(false);
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
+        const studentName = JSON.parse(localStorage.getItem("studentName"));
         const exercise = JSON.parse(localStorage.getItem("exercise"));
-        if (user) {
-            const { idstudent, idgrade, idschool } = user;
-            const name = `${idstudent} ${idgrade} ${idschool}`;
-            setUserName(name);
+        
+        if (studentName) {
+            setUserName(studentName);
         }
 
         if (exercise) {
@@ -141,7 +138,7 @@ function Exercise() {
 
     //console.log(currentTask);
     return (
-        <div>
+        <div style={{ height: '100vh' }}>
             <nav className="main-navbar">
                 <span>{userName}</span>
                 <span>{exerciseName}</span>
@@ -152,7 +149,7 @@ function Exercise() {
                     Nema vježbe koja je zadana za rješavanje!
                 </div>}
             {exerciseExist &&
-                <div>
+                <div style={{ height: '85vh' }}>
                     {renderTask()}
                 </div>}
         </div>
