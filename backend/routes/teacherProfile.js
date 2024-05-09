@@ -119,8 +119,8 @@ router.get('/getExercises', async function (req, res) {
                 message: 'Unauthenticated - Cookie invalid'
             })
         }
-        rows = await getExercises()
 
+        rows = await getExercises()
         if (rows) {
             res.json({
                 exercises: rows
@@ -141,7 +141,12 @@ getExercises = async function () {
     const sql = `SELECT * FROM exercise`;
     try {
         const result = await db.query(sql, []);
-        return result.rows
+        const exercises = result.rows;
+        for (const exercise of exercises) {
+            exercise.tasks = await getTasksForExerciseProfile(exercise.idexercise);
+            //console.log(exercise.tasks)
+        }
+        return exercises;
     } catch (err) {
         console.log(err);
         throw err
@@ -181,5 +186,19 @@ getStudentsByGradeId = async function (idgrade) {
         throw err
     }
 }
+
+getTasksForExerciseProfile = async function (idexercise) {
+    const sql = `SELECT idtask FROM exercisetask WHERE idexercise = `+ idexercise;
+    try {
+        const result = await db.query(sql, []);
+        const idTasks = result.rows;
+        const extractedIds = idTasks.map(task => task.idtask);
+        console.log(extractedIds)
+        return extractedIds;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+};
 
 module.exports = router;

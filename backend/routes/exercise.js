@@ -16,13 +16,13 @@ router.post('/sendLog', async function (req, res) {
 
     let studentAnswer = req.body.studentAnswer;
     let correctAnswer = req.body.correctAnswer;
-    if(req.body.type === 'table'){
-        studentAnswer = JSON.stringify(req.body.studentAnswer); 
+    if (req.body.type === 'table') {
+        studentAnswer = JSON.stringify(req.body.studentAnswer);
         correctAnswer = JSON.stringify(req.body.correctAnswer);
     }
     const sql = `INSERT INTO logs (duration, correct, studentanswer, correctanswer, idstudent, idexercise, idtask, createddate)
-                VALUES ('` + duration + `',` + req.body.correct + `, '` + studentAnswer + `', '` + correctAnswer + `',` 
-                + req.body.idstudent + `,` + req.body.idexercise + `,` + req.body.idtask + `,` + ` CURRENT_TIMESTAMP)`;
+                VALUES ('` + duration + `',` + req.body.correct + `, '` + studentAnswer + `', '` + correctAnswer + `',`
+        + req.body.idstudent + `,` + req.body.idexercise + `,` + req.body.idtask + `,` + ` CURRENT_TIMESTAMP)`;
     const result = await db.query(sql, []);
 
     if (result) {
@@ -94,7 +94,6 @@ router.post('/save', async function (req, res) {
 router.get('/getSettedExercise', async (req, res) => {
     rows = await getExerciseSetToStart();
 
-    console.log(rows)
     if (rows) {
         res.json({
             exercise: rows
@@ -103,6 +102,54 @@ router.get('/getSettedExercise', async (req, res) => {
         res.json({
             err: "Greška pri dohvatu vježbe"
         })
+    }
+})
+
+router.post('/getExercise', async (req, res) => {
+    rows = await getExerciseById(req.body.idexercise);
+
+    console.log(rows[0])
+    if (rows) {
+        res.json({
+            exercise: rows
+        })
+    } else {
+        res.json({
+            err: "Greška pri dohvatu vježbe"
+        })
+    }
+})
+
+router.post('/update', async (req, res) => {
+    const idexercise = req.body.idexercise;
+    rows = await getExerciseSetToStart();
+    if (rows && req.body.start) {
+        res.json({
+            err: 'Već postoji vježba postavljena za odradit'
+        })
+    } else {
+        const sql = `UPDATE exercise
+         SET start = `+ req.body.start + `, name = '` + req.body.name +
+            `' WHERE idexercise=` + idexercise;
+        const result = await db.query(sql, []);
+        console.log(sql)
+        let result2 = null;
+        if (req.body.tasks.length > 0) {
+            for (const idtask of req.body.tasks) {
+                const sql2 = `DELETE from exercisetask where idexercise = ` + idexercise + ` AND idtask = ` + idtask;
+                result2 = await db.query(sql2, []);
+            }
+        }
+
+        if (result && result2) {
+             res.json({
+                 success: true
+             })
+         } else {
+             res.json({
+                 err: "Greška pri update vježbe"
+             })
+         }
     }
 })
 
@@ -144,6 +191,49 @@ getLatestLog = async function () {
     } catch (err) {
         console.log(err);
         throw err
+    }
+}
+
+getExerciseById = async function (idexercise) {
+    const sql = `SELECT * FROM exercise WHERE idexercise=` + idexercise;
+    try {
+        const result = await db.query(sql, []);
+        const exercise = result.rows;
+        exercise[0].tasks = await getTasksForExercise(idexercise);
+        return exercise;
+    } catch (err) {
+        console.log(err);
+        throw err
+    }
+}
+
+getTasksForExercise = async function (idexercise) {
+    const sql = `SELECT idtask FROM exercisetask WHERE idexercise = ` + idexercise;
+    try {
+        const result = await db.query(sql, []);
+        const idTasks = result.rows;
+        const extractedIds = idTasks.map(task => task.idtask);
+
+        let tasksArray = [];
+        for (const idtask of extractedIds) {
+            const task = await getTaskById(idtask);
+            tasksArray.push(JSON.stringify(task))
+        }
+        return tasksArray;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+};
+
+getTaskById = async function (idtask) {
+    const sql = `SELECT * FROM task WHERE idtask = ` + idtask;
+    try {
+        const result = await db.query(sql, []);
+        return result.rows[0];
+    } catch (err) {
+        console.log(err);
+        throw err;
     }
 }
 

@@ -1,0 +1,114 @@
+.tasks-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tasks-section th {
+    background-color: #74a5da;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.tasks-section td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tasks-section tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tasks-section tbody tr:hover {
+    background-color: #ddd;
+}
+
+.button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.wrong {
+    background-color: #f8d7da;
+    border: 1px solid #f6bec4; 
+    color: #c96871;
+    border-radius: .25rem; 
+    padding: .75rem 1.25rem;
+    font-weight: bold;
+}
+
+.nc-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}
+
+/* Input Styles */
+input[type="text"] {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Checkbox Styles */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.checkbox-label {
+    margin-bottom: 0;
+    margin-right: 0.5rem;
+}
+
+/* Custom Checkbox Styles */
+input[type="checkbox"] {
+    position: relative;
+    height: 1.5rem;
+    margin-top: 0.3rem;
+    margin-right: 0.5rem;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 0.25rem;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+input[type="checkbox"]:checked::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    left: 0.25rem;
+    width: 0.3rem;
+    height: 0.6rem;
+    border: solid #fff;
+    border-width: 0 0.2rem 0.2rem 0;
+    transform: rotate(45deg);
+}

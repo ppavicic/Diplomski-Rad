@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/FillInTask.css";
+import '../styles/AddTask.css'
 import axios from 'axios';
 import { URL } from "./Constants";
 
 function FillInTask() {
     const [taskInput, setTaskInput] = useState("");
-    const [result, setResult] = useState(false);
+    let [result, setResult] = useState(false);
     const [showResult, setShowResult] = useState(false);
     const [fillin, setFillin] = useState("");
     const [hint, setHint] = useState("");
@@ -25,7 +26,6 @@ function FillInTask() {
             setFillin(textJSON.fillin);
             setHint(textJSON.hint);
             setQuestion(textJSON.question);
-            setResult(text);
             setShowResult(true);
         } catch (error) {
             console.error(error);
@@ -55,12 +55,22 @@ function FillInTask() {
         }
     };
 
+    result =
+        <div className="selection-result">
+            <div>
+                Rečenica: {question}
+            </div>
+            <div>
+                Riječ za nadopunit: "{fillin}"
+            </div>
+            <div>
+                HINT: {hint}
+            </div>
+        </div>
     return (
-        <div className="">
-            <div className="instructions">
-                <h2>Upute:</h2>
-                <p>Ovo je alat za izradu zadataka uz pomoć AI! Umjetna inteligencija može vam pomoći u generiranju zadatka na temelju vašeg upita.
-                 Unesite npr. "Izgeneriraj mi smislenu rečenicu koja sadrži riječ kuća"</p>
+        <div className="fillin-content">
+            <div className="instructions">UPUTE: Unesite upit Umjetnoj Inteligenciji za generiranje rečenice koju će trebat nadopunit s ispravnom riječi.
+                Npr. "Izgeneriraj mi smislenu rečenicu koja sadrži riječ kuća". Točna riječ, koju će trebat napisati, mora se nalaziti u rečenici u istom obliku.
             </div>
             {!showResult && (
                 <div>
@@ -79,13 +89,13 @@ function FillInTask() {
                 </div>
             )}
             {showResult && (
-                <div>
+                <div className="selection" style={{margin:'0 10%'}}>
                     <div className="result">
                         {result}
                     </div>
-                    <div>
+                    <div className="button-container">
                         <button className="button" onClick={handleSave}>Spremi</button>
-                        <button className="button" onClick={() => setShowResult(false)}>Ponovi</button>
+                        <button className="button" style={{marginLeft:'10px'}} onClick={() => setShowResult(false)}>Ponovi</button>
                     </div>
                 </div>
             )}

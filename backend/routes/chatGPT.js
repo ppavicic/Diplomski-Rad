@@ -22,9 +22,9 @@ router.post('/', async function (req, res) {
 
     let prompt = "";
     if (req.body.type === 'nadopuna') {
-      prompt = `Pravim zadatak za provjeru pravopisa iz hrvatskog jezika. Zadatak je tipa nadopunjavanja pa bi mi trebao izgenerirat rečenicu u kojoj će korisnici morat unijet ispravnu riječ. 
-      Hoću da mi vratiš odgovor u obliku JSON. Tako da mi generirana rečenica bude navedena pod atributom "question". Riječ koju će trebati nadopunit pod atributom "fillin".
-      Pomoć pod atributom "hint". Koristi hrvatski jezik i pravopis. Ne koristi navodnike u hintu.${req.body.prompt}`;
+      prompt = `Pravim zadatak za provjeru pravopisa iz hrvatskog jezika. Trebas mi izgenerirat rečenicu bez placeholdera. 
+      Hoću da mi vratiš odgovor u obliku JSON. Tako da mi generirana rečenica bude navedena pod atributom "question".
+      Riječ navedi pod atributom "fillin". Riječ mora bit u istom obliku u kojem je u rečenici. Pomoć pod atributom "hint". Koristi hrvatski jezik i pravopis. Ne koristi navodnike u hintu.${req.body.prompt}.`;
     } else if (req.body.type === 'diktat') {
       prompt = `${req.body.prompt} Hoću da mi vratiš odgovor u obliku JSON. Tako da mi tekst za diktat bude naveden pod atributom "text". 
       Koristi hrvatski jezik i pravopis.`

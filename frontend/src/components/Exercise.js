@@ -30,6 +30,7 @@ function Exercise() {
             let solvedCounter = exercise.solvedCounter
             if (solvedCounter >= exercise.tasks.length) {
                 localStorage.removeItem('exercise');
+                localStorage.removeItem('studentName');
                 navigate("/");
             } else {
                 setCurrentTask(exercise.tasks[solvedCounter])
@@ -40,6 +41,7 @@ function Exercise() {
     const handleLogout = async () => {
         try {
             localStorage.removeItem("user");
+            localStorage.removeItem("studentName")
             navigate("/");
         } catch (error) {
             console.error("Logout error:", error);

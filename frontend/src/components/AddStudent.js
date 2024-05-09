@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/ProfilePage.css";
+import "../styles/AddStudent.css";
 import axios from 'axios';
 import { URL } from "./Constants";
 
@@ -85,24 +85,28 @@ function AddStudent() {
     gradesList.push(<option disabled key={-1} value={"default"}>Choose an option</option>);
 
     return (
-        <div>
+        <div style={{ height: '100%' }}>
             <nav className="main-navbar">
                 <h2>Stvori novog učenika</h2>
                 <button className="button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
             </nav>
             <form onSubmit={handleSubmit} className="inputs">
-                <h2 className="input-title">Unesi ime</h2>
-                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Unesite ime" />
+                <h2 className="input-text">Unesi ime</h2>
+                <div className="input-container">
+                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Unesite ime" />
+                </div>
 
-                <h2 className="input-title">Unesi prezime</h2>
-                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Unesite prezime" />
+                <h2 className="input-text">Unesi prezime</h2>
+                <div className="input-container">
+                    <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Unesite prezime" />
+                </div>
 
-                <h2 className="input-title">Škola</h2>
+                <h2 className="input-text">Škola</h2>
                 <select value={school} defaultValue={'default'} name="school" className="input-container" aria-label="Default select example" onChange={handleSchoolChange}>
                     {schoolsList}
                 </select>
 
-                <h2 className="input-title">Odaberi Razred</h2>
+                <h2 className="input-text">Odaberi Razred</h2>
                 <select value={grade} defaultValue={'default'} name="grade" className="input-container" aria-label="Default select example" onChange={handleGradeChange}>
                     {gradesList}
                 </select>

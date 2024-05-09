@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import "../styles/AddExercise.css";
 import { URL } from "./Constants";
 
 function AddExercise() {
@@ -87,7 +88,7 @@ function AddExercise() {
             <td>{task.audio === "undefined" ? "-" : task.audio}</td>
             <td>{task.tablejson === "undefined" ? "-" : task.tablejson}</td>
             <td>
-                <button onClick={() => handleAddTask(task)}>Dodaj</button>
+                <button className="button" onClick={() => handleAddTask(task)}>Dodaj</button>
             </td>
         </tr>)
 
@@ -104,70 +105,75 @@ function AddExercise() {
             <td>{task.audio === "undefined" ? "-" : task.audio}</td>
             <td>{task.tablejson === "undefined" ? "-" : task.tablejson}</td>
             <td>
-                <button onClick={() => handleRemoveTask(task.idtask)}>Makni</button>
+                <button className="button" onClick={() => handleRemoveTask(task.idtask)}>Makni</button>
             </td>
         </tr>)
     return (
         <div style={{ height: "100%" }}>
             <nav className="main-navbar">
-                <h2>Stvori novu vježbu</h2>
                 <button className="button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
+                <h2>Stvori novu vježbu</h2>
+                <button className="button" onClick={handleSave}>Spremi</button>
             </nav>
             {error &&
-                <div>
+                <div className="wrong">
                     {errorMsg}
                 </div>}
-            <div>
+            <div className="nc-container">
                 <input type="text" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} placeholder="Unesite ime vježbe" />
-                <div>
-                    Postavi vježbu učenicima za vježbanje: 
-                    <input type="checkbox" checked={exerciseStart} onChange={() => setExerciseStart(prev => !prev)} />
+                <div className="checkbox-container">
+                    <label htmlFor="exerciseCheckbox" className="checkbox-label">Postavi vježbu učenicima za vježbanje:</label>
+                    <input type="checkbox" id="exerciseCheckbox" checked={exerciseStart} onChange={() => setExerciseStart(prev => !prev)} />
                 </div>
-                <button className="button" onClick={handleSave}>Spremi</button>
             </div>
             {showSelected &&
-                <div>
-                    <h2>Odabrani zadaci</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Vrsta</th>
-                                <th>Pitanje</th>
-                                <th>Hint</th>
-                                <th>Odabir 1</th>
-                                <th>Odabir 2</th>
-                                <th>Nadopuna</th>
-                                <th>Audio</th>
-                                <th>Tablica</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {listSelectedTasks}
-                        </tbody>
-                    </table>
-                </div>}
-            <h2>Svi zadaci</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Vrsta</th>
-                        <th>Pitanje</th>
-                        <th>Hint</th>
-                        <th>Odabir 1</th>
-                        <th>Odabir 2</th>
-                        <th>Nadopuna</th>
-                        <th>Audio</th>
-                        <th>Tablica</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {listTasks}
-                </tbody>
-            </table>
+                <section className="tasks-section" style={{ marginTop: '10px' }}>
+                    <div>
+                        <h2>Odabrani zadaci</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Vrsta</th>
+                                    <th>Pitanje</th>
+                                    <th>Hint</th>
+                                    <th>Odabir 1</th>
+                                    <th>Odabir 2</th>
+                                    <th>Nadopuna</th>
+                                    <th>Audio</th>
+                                    <th>Tablica</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listSelectedTasks}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            }
+            <section className="tasks-section" style={{ marginTop: '10px' }}>
+                <h2>Svi zadaci</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Vrsta</th>
+                            <th>Pitanje</th>
+                            <th>Hint</th>
+                            <th>Odabir 1</th>
+                            <th>Odabir 2</th>
+                            <th>Nadopuna</th>
+                            <th>Audio</th>
+                            <th>Tablica</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listTasks}
+                    </tbody>
+                </table>
+            </section>
         </div>
     );
 }

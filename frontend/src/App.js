@@ -7,9 +7,10 @@ import AddTask from "./components/AddTask";
 import AddExercise from "./components/AddExercise";
 import AddStudent from "./components/AddStudent";
 import Exercise from "./components/Exercise";
-import TextToSpeechComponent from "./components/TextToSpeechComponent";
+import EditExercise from "./components/EditExercise";
+import EditTask from "./components/EditTask";
+import EditStudent from "./components/EditStudent";
 import PrivateRoutes from "./components/Private";
-
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           <Route path="/addTask" element={<PrivateRoutes> <AddTask /> </PrivateRoutes>} exact />
           <Route path="/addExercise" element={<PrivateRoutes> <AddExercise /> </PrivateRoutes>} exact />
           <Route path="/addStudent" element={<PrivateRoutes> <AddStudent /> </PrivateRoutes>} exact />
+          <Route path="/editExercise" element={<PrivateRoutes> <EditExercise /> </PrivateRoutes>} exact />
+          <Route path="/editTask" element={<PrivateRoutes> <EditTask /> </PrivateRoutes>} exact />
+          <Route path="/editStudent" element={<PrivateRoutes> <EditStudent /> </PrivateRoutes>} exact />
         </Routes>
       </Router>
     </div>

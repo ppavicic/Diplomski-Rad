@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
+import '../styles/AddTask.css'
 import { URL } from "./Constants";
 
 function DictationTask() {
@@ -110,9 +111,10 @@ function DictationTask() {
     };
 
     return (
-        <div className="">
+        <div className="dictation-content">
             {!showResult && (
                 <div>
+                    <div className="instructions">UPUTE: Unesite upit Umjetnoj Inteligenciji za generiranje diktata. Npr. "Izgeneriraj mi teskt za diktat".</div>
                     <div className="textarea-container">
                         <textarea
                             value={taskInput}
@@ -122,30 +124,30 @@ function DictationTask() {
                             cols={70}
                         />
                     </div>
-                    <div>
+                    <div className="button-container">
                         <button className="submit-btn button" onClick={handleSubmit}>Submit</button>
                     </div>
                 </div>
             )}
 
             {showResult && (
-                <div>
-                    <div className="result">
-                        <div>
+                <div className="dictation-result-container">
+                    <div className="dictation-audio-result">
+                        <div className='dictation-audio'>
                             <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} />
-                            <div>
-                                <button onClick={togglePlay}>{isPlaying ? 'Pause' : 'Play'}</button>
-                                <div style={{ width: '200px', height: '10px', backgroundColor: 'lightgray', position: 'relative' }} onClick={handleSeek}>
-                                    <div style={{ width: `${progress}%`, height: '100%', backgroundColor: 'blue', position: 'absolute', top: 0, left: 0 }} />
-                                </div>
+                            <button className='audioBtn' onClick={togglePlay}>{isPlaying ? 'Pause' : 'Play'}</button>
+                            <div className='audioBarContainer' onClick={handleSeek}>
+                                <div className='audioBar' style={{ width: `${progress}%`, height: '100%', backgroundColor: 'blue', position: 'absolute', top: 0, left: 0 }} />
                             </div>
                         </div>
-                        {result}
+                        <div className="dictation-text-result">
+                            TEKST: {result}
+                        </div>
                     </div>
                     <div>
                         {!showSaveBtn && <button className="submit-btn button" onClick={convertTextToAudio}>Generiraj audio</button>}
                         {showSaveBtn && <button className="submit-btn button" onClick={handleSave}>Spremi</button>}
-                        <button className="button" onClick={handleReset}>Ponovi</button>
+                        <button style={{marginLeft:"10px"}} className="button" onClick={handleReset}>Ponovi</button>
                     </div>
                 </div>
             )}

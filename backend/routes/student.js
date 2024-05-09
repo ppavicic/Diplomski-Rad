@@ -50,6 +50,23 @@ router.post('/getStudent', async function (req, res) {
     }
 })
 
+router.post('/update', async (req, res) => {
+    const sql = `UPDATE student
+         SET firstname = '`+ req.body.firstname + `', lastname = '`+ req.body.lastname + 
+         `' WHERE idstudent=` + req.body.idstudent;
+         console.log(sql)
+    const result = await db.query(sql, []);   
+    if (result) {
+        res.json({
+            success: true
+        })
+    } else {
+        res.json({
+            err: "Greška pri update studenta"
+        })
+    }
+})
+
 getStudentById = async function (idstudent) {
     const sql = `SELECT * FROM student WHERE idstudent = ` + idstudent;
     try {

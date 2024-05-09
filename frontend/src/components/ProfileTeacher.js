@@ -51,16 +51,19 @@ function ProfileTeacher() {
         }
     };
 
-    const handleStudent = () => {
-        navigate("/addStudent");
+    const handleStudent = (idstudent) => {
+        localStorage.setItem("student", JSON.stringify(idstudent));
+        navigate("/editStudent");
     };
 
-    const handleTask = () => {
-        navigate("/addTask");
+    const handleTask = (idtask) => {
+        localStorage.setItem("task", JSON.stringify(idtask));
+        navigate("/editTask");
     }
 
-    const handleExercise = () => {
-        navigate("/addExercise");
+    const handleExercise = (idexercise) => {
+        localStorage.setItem("exercise", JSON.stringify(idexercise));
+        navigate("/editExercise");
     }
 
     const handleGradeChange = async (event) => {
@@ -116,11 +119,13 @@ function ProfileTeacher() {
             {/*<td>{student.idstudent}</td>*/}
             <td>{student.firstname}</td>
             <td>{student.lastname}</td>
+            <td><button className="button" onClick={() => handleStudent(student.idstudent)}>Uredi</button></td>
         </tr>)
 
     let j = 0
     const listTasks = tasks.map(task =>
         <tr key={j++}>
+            <td>{task.idtask}</td>
             <td>{task.type}</td>
             <td>{task.question}</td>
             <td>{task.hint}</td>
@@ -129,6 +134,7 @@ function ProfileTeacher() {
             <td>{task.answer2 === "undefined" ? "-" : task.answer2}</td>
             <td>{task.audio === "undefined" ? "-" : task.audio}</td>
             <td>{task.tablejson === "undefined" ? "-" : task.tablejson}</td>
+            <td><button className="button" onClick={() => handleTask(task.idtask)}>Uredi</button></td>
         </tr>)
 
     let k = 0
@@ -137,12 +143,14 @@ function ProfileTeacher() {
             <td>{exercise.idexercise}</td>
             <td>{exercise.name}</td>
             <td>{exercise.start ? 'True' : 'False'}</td>
+            <td>{exercise.tasks.join(', ')}</td>
+            <td><button className="button" onClick={() => handleExercise(exercise.idexercise)}>Uredi</button></td>
         </tr>)
 
     return (
         <div style={{ height: '100vh' }}>
             <nav className="main-navbar">
-                <button className="toggle-sidebar-button" onClick={toggleSidebar}>
+                <button className={`toggle-sidebar-button ${showSidebar ? 'move-right' : ''}`} onClick={toggleSidebar}>
                     SIDEBAR
                 </button>
                 <span>{name}</span>
@@ -152,9 +160,9 @@ function ProfileTeacher() {
             <main className="content">
                 {showSidebar &&
                     <aside className="sidebar-navbar">
-                        <button className="option-button" onClick={handleStudent}>Add Student</button>
-                        <button className="option-button" onClick={handleTask}>Add Task</button>
-                        <button className="option-button" onClick={handleExercise}>Add Exercise</button>
+                        <button className="option-button" onClick={() => navigate("/addStudent")}>Add Student</button>
+                        <button className="option-button" onClick={() => navigate("/addTask")}>Add Task</button>
+                        <button className="option-button" onClick={() => navigate("/addExercise")}>Add Exercise</button>
                     </aside>
                 }
 
@@ -164,6 +172,7 @@ function ProfileTeacher() {
                         <table>
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Tip</th>
                                     <th>Pitanje</th>
                                     <th>Hint</th>
@@ -172,6 +181,7 @@ function ProfileTeacher() {
                                     <th>Odabir2</th>
                                     <th>Audio</th>
                                     <th>Tablica</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -191,6 +201,8 @@ function ProfileTeacher() {
                                     <th>ID</th>
                                     <th>Ime vježbe</th>
                                     <th>Pokreni</th>
+                                    <th>Zadaci</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -202,15 +214,18 @@ function ProfileTeacher() {
                 </section>
 
                 <section className="students-section">
-                    <h2>UČENICI</h2>
-                    <select value={grade} defaultValue={'default'} name="grade" className="input-container" aria-label="Default select example" onChange={handleGradeChange}>
-                        {gradesList}
-                    </select>
+                    <div className="grade-select">
+                        <h2>UČENICI</h2>
+                        <select value={grade} defaultValue={'default'} name="grade" className="input-container" aria-label="Default select example" onChange={handleGradeChange}>
+                            {gradesList}
+                        </select>
+                    </div>
                     <table>
                         <thead>
                             <tr>
                                 <th>Ime</th>
                                 <th>Prezime</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
