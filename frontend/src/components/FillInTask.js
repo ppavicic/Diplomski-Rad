@@ -34,9 +34,6 @@ function FillInTask() {
 
     const handleSave = async () => {
         try {
-            console.log("result" + result)
-            const resultParts = result.split(';');
-            console.log("part1" + resultParts[0], resultParts[1])
             const data = {
                 type: 'nadopuna',
                 fillin: fillin,

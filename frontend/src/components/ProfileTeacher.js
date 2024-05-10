@@ -29,7 +29,10 @@ function ProfileTeacher() {
             const user = JSON.parse(localStorage.getItem("user"));
             const data = { idteacher: user.idteacher };
             const response1 = await axios.post(`${URL}/teacherProfile/getGrades`, data, {
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    "Content-Type": "application/json"
+                },
                 withCredentials: true
             });
             setGrades(response1.data.grades);
