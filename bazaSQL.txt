@@ -92,3 +92,19 @@ CREATE TABLE LOGS
   FOREIGN KEY (idExercise) REFERENCES EXERCISE(idExercise),
   PRIMARY KEY (idLog)
 );
+
+
+
+
+insert into place(name, postalcode) values('Zagreb', 10000);
+insert into school(name, idplace) values('OŠ Horvati', 1);
+insert into teacher(firstname, lastname, username, password) values('Petar', 'Pavičić', 'test', 'test');
+insert into grade(department, idteacher, idschool) values
+	('3.A', 1, 1),
+	('3.B', 1, 1);
+insert into student(firstname, lastname, idgrade) values
+	('Bartol', 'Boras', 1),
+	('Marko', 'Grgić', 1),
+	('Ivo', 'Ivić', 1),
+	('Stjepan', 'Mlakić', 2),
+	('Toni', 'Rezić', 2);
