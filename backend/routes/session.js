@@ -25,7 +25,9 @@ router.post("/loginTeacher", async (req, res) => {
 
     res.cookie('jwt', token, {
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000 // 1 day
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+        sameSite: 'None',
+        secure: true 
     })
 
     const userToSend = {
