@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LoginTeacher from "./components/LoginTeacher";
 import LoginStudent from "./components/LoginStudent";
 import ProfileTeacher from "./components/ProfileTeacher";
@@ -15,20 +15,19 @@ import PrivateRoutes from "./components/Private";
 function App() {
   return (
     <div className="App" style={{ height: '100vh' }}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LoginStudent />} exact/>
-          <Route path="/loginTeacher" element={<LoginTeacher />} exact/>
-          <Route path="/profileTeacher" element={<PrivateRoutes> <ProfileTeacher /> </PrivateRoutes>} exact />
-          <Route path="/exercise" element={<PrivateRoutes> <Exercise /> </PrivateRoutes>} exact />
-          <Route path="/addTask" element={<PrivateRoutes> <AddTask /> </PrivateRoutes>} exact />
-          <Route path="/addExercise" element={<PrivateRoutes> <AddExercise /> </PrivateRoutes>} exact />
-          <Route path="/addStudent" element={<PrivateRoutes> <AddStudent /> </PrivateRoutes>} exact />
-          <Route path="/editExercise" element={<PrivateRoutes> <EditExercise /> </PrivateRoutes>} exact />
-          <Route path="/editTask" element={<PrivateRoutes> <EditTask /> </PrivateRoutes>} exact />
-          <Route path="/editStudent" element={<PrivateRoutes> <EditStudent /> </PrivateRoutes>} exact />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<LoginStudent />} exact />
+        <Route path="/loginTeacher" element={<LoginTeacher />} />
+        <Route path="/loginTeacher" element={<LoginTeacher />} exact />
+        <Route path="/profileTeacher" element={<PrivateRoutes> <ProfileTeacher /> </PrivateRoutes>} exact />
+        <Route path="/exercise" element={<PrivateRoutes> <Exercise /> </PrivateRoutes>} exact />
+        <Route path="/addTask" element={<PrivateRoutes> <AddTask /> </PrivateRoutes>} exact />
+        <Route path="/addExercise" element={<PrivateRoutes> <AddExercise /> </PrivateRoutes>} exact />
+        <Route path="/addStudent" element={<PrivateRoutes> <AddStudent /> </PrivateRoutes>} exact />
+        <Route path="/editExercise" element={<PrivateRoutes> <EditExercise /> </PrivateRoutes>} exact />
+        <Route path="/editTask" element={<PrivateRoutes> <EditTask /> </PrivateRoutes>} exact />
+        <Route path="/editStudent" element={<PrivateRoutes> <EditStudent /> </PrivateRoutes>} exact />
+      </Routes>
     </div>
   );
 }
