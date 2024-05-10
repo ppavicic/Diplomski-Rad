@@ -183,8 +183,7 @@ const LoginStudent = () => {
                     <button className="button">KRENI</button>
                 </div>
                 <div className="login-signup-link-container">
-                    <button className="button" onClick={handleNavigate}>Nastavnik?</button>
-                    <a href="/loginTeacher">Nastavnik?</a>
+                    Ako ste nastavnik prijavi se <button className="" onClick={handleNavigate}>ovdje</button>
                 </div>
             </form>
             {showErrMsg && (
