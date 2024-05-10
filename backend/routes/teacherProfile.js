@@ -38,6 +38,7 @@ router.post('/getGrades', async function (req, res) {
         rows = await getGradesByTeacherId(req.body.idteacher)
 
         if (rows) {
+            res.header('Access-Control-Allow-Credentials', 'true');
             res.json({
                 grades: rows
             })

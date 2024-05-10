@@ -34,7 +34,7 @@ router.post("/loginTeacher", async (req, res) => {
         lastname: user.lastname,
         username: user.username
     };
-
+    res.header('Access-Control-Allow-Credentials', 'true');
     res.status(201).send({
         message: 'Success',
         user: userToSend
