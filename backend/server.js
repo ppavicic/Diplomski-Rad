@@ -15,7 +15,7 @@ const app = express();
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'http://localhost:8080']
+    origin: ['http://localhost:3000', 'http://localhost:8080', 'https://diplomski-frontend.onrender.com']
 }));
 app.use(express.json());
 
