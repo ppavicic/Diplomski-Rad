@@ -45,7 +45,7 @@ router.post("/loginTeacher", async (req, res) => {
 
 router.post('/logoutTeacher', (req, res) => {
     res.cookie('jwt', '', { maxAge: 0 })
-
+    res.clearCookie('jwt');
     res.status(201).send({
         message: 'Success'
     })
