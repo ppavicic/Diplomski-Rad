@@ -138,6 +138,10 @@ const LoginStudent = () => {
         }
     };
 
+    const handleNavigate = () => {
+        navigate('/loginTeacher');
+    };
+
     const schoolsList = schools.map((school, i) => (
         <option key={i} value={school.idschool}>{school.name}</option>
     ));
@@ -179,6 +183,7 @@ const LoginStudent = () => {
                     <button className="button">KRENI</button>
                 </div>
                 <div className="login-signup-link-container">
+                    <button className="button" onClick={handleNavigate}>Nastavnik?</button>
                     <a href="/loginTeacher">Nastavnik?</a>
                 </div>
             </form>
