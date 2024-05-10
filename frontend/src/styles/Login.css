@@ -30,7 +30,7 @@ input[type="submit"] {
 
 .login-signup-link-container {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
 }
 
@@ -179,4 +179,18 @@ input[type="submit"] {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   color: grey;
+}
+
+.redirect-button {
+  background-color: #f0f0f0; 
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.redirect-button:hover {
+  background-color: #dcdcdc;
 }

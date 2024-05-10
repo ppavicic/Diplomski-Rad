@@ -183,7 +183,7 @@ const LoginStudent = () => {
                     <button className="button">KRENI</button>
                 </div>
                 <div className="login-signup-link-container">
-                    Ako ste nastavnik prijavi se <button className="" onClick={handleNavigate}>ovdje</button>
+                    Ako ste nastavnik prijavi se <button className="redirect-button" style={{marginLeft:'2px'}} onClick={handleNavigate}>ovdje</button>
                 </div>
             </form>
             {showErrMsg && (
