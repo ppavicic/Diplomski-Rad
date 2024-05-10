@@ -1,12 +1,12 @@
 const {Pool} = require('pg');
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost', 
-    database: 'diplomski', 
-    password: 'bazepodataka',
+    user: 'diplomski_o917_user', //postgres
+    host: 'dpg-cov0l80l6cac73bd0pl0-a.frankfurt-postgres.render.com', //localhost
+    database: 'diplomski_o917', //diplomski
+    password: 'rIsnhLQoCAQQIhK91sFo0wQiJBKKJ2ko', //bazepodataka
     port: 5432,
-    ssl: process.env.DATABASE_URL ? true : false
+    ssl: true
 });
 
 module.exports = {
