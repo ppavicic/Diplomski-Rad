@@ -17,8 +17,8 @@ function App() {
     <div className="App" style={{ height: '100vh' }}>
       <Router>
         <Routes>
-          <Route path="/" exact element={<LoginStudent />} />
-          <Route path="/loginTeacher" element={<LoginTeacher />} />
+          <Route path="/" element={<LoginStudent />} exact/>
+          <Route path="/loginTeacher" element={<LoginTeacher />} exact/>
           <Route path="/profileTeacher" element={<PrivateRoutes> <ProfileTeacher /> </PrivateRoutes>} exact />
           <Route path="/exercise" element={<PrivateRoutes> <Exercise /> </PrivateRoutes>} exact />
           <Route path="/addTask" element={<PrivateRoutes> <AddTask /> </PrivateRoutes>} exact />
