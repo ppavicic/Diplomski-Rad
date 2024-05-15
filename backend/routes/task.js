@@ -15,10 +15,9 @@ router.post('/save', async function (req, res) {
             })
         }
 
-        console.log(req.body);
-
+        let hint = req.body.hint.replace(/'/g, '');
         const sql = `INSERT INTO task (type, question, hint, fillin, answer1, answer2, audio, tablejson)
-        VALUES ('` + req.body.type + `', '` + req.body.question + `', '` + req.body.hint + `', '` + req.body.fillin + `', '`
+        VALUES ('` + req.body.type + `', '` + req.body.question + `', '` + hint + `', '` + req.body.fillin + `', '`
             + req.body.answer1 + `', '` + req.body.answer2 + `', '` + req.body.audio + `', '` + req.body.tableJSON + `')`;
         const result = await db.query(sql, []);
 
@@ -95,13 +94,14 @@ router.post('/getTask', async function (req, res) {
 })
 
 router.post('/update', async (req, res) => {
-    console.log(req.body);
+    let hint = req.body.hint.replace(/'/g, '');
+
     const sql = `UPDATE task
-         SET type = '`+ req.body.type + `', question = '`+ req.body.question + `', hint = '` + req.body.hint + `', fillin = '` 
-         + req.body.fillin + `' , answer1 = '` + req.body.answer1 + `', answer2 = '` + req.body.answer2 + `', audio = '` + req.body.audio + `', tablejson = '` + req.body.tablejson
-         + `' WHERE idtask=` + req.body.idtask;
-         console.log(sql)
-    const result = await db.query(sql, []);   
+         SET type = '`+ req.body.type + `', question = '` + req.body.question + `', hint = '` + hint + `', fillin = '`
+        + req.body.fillin + `' , answer1 = '` + req.body.answer1 + `', answer2 = '` + req.body.answer2 + `', audio = '` + req.body.audio + `', tablejson = '` + req.body.tablejson
+        + `' WHERE idtask=` + req.body.idtask;
+
+    const result = await db.query(sql, []);
     if (result) {
         res.json({
             success: true

@@ -49,7 +49,7 @@ router.post('/save', async function (req, res) {
         const sqlSelect1 = `SELECT idexercise FROM exercise WHERE start = true`;
         const result = await db.query(sqlSelect1, []);
         console.log(result)
-        if (result.rowCount !== 0) {
+        if (result.rowCount !== 0 && req.body.start) {
             return res.json({
                 success: false,
                 message: "Već postoji vježba koja je postavljena učenicima za vježbanje!"

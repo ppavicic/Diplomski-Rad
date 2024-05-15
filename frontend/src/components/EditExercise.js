@@ -116,7 +116,6 @@ function EditExercise() {
                     <div>
                         <label className="input-title">Odabrat vježbu za rješavanje?</label>
                         <select value={start} name="pokreni" className="input-container" aria-label="Default select example" onChange={handleStartChange}>
-                            <option value="default">Odaberite</option>
                             <option value="true">DA</option>
                             <option value="false">NE</option>
                         </select>
