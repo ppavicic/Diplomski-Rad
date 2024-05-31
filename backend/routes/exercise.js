@@ -123,6 +123,7 @@ router.post('/getExercise', async (req, res) => {
 router.post('/update', async (req, res) => {
     const idexercise = req.body.idexercise;
     rows = await getExerciseSetToStart();
+    console.log(Boolean(req.body.start))
     if (rows && req.body.start) {
         res.json({
             err: 'Već postoji vježba postavljena za odradit'
@@ -135,21 +136,23 @@ router.post('/update', async (req, res) => {
         console.log(sql)
         let result2 = null;
         if (req.body.tasks.length > 0) {
-            for (const idtask of req.body.tasks) {
-                const sql2 = `DELETE from exercisetask where idexercise = ` + idexercise + ` AND idtask = ` + idtask;
-                result2 = await db.query(sql2, []);
+            if (result) {
+                for (const idtask of req.body.tasks) {
+                    const sql2 = `DELETE from exercisetask where idexercise = ` + idexercise + ` AND idtask = ` + idtask;
+                    result2 = await db.query(sql2, []);
+                }
             }
         }
 
-        if (result && result2) {
-             res.json({
-                 success: true
-             })
-         } else {
-             res.json({
-                 err: "Greška pri update vježbe"
-             })
-         }
+        if (result || result2) {
+            res.json({
+                success: true
+            })
+        } else {
+            res.json({
+                err: "Greška pri update vježbe"
+            })
+        }
     }
 })
 

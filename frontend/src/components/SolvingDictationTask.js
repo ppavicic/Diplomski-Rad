@@ -12,6 +12,7 @@ const SolvingDictationTask = ({ idtask, question, audio, nextTask, sendLog }) =>
    const [correctFlag, setCorrectFlag] = useState(false);
    const [wrongFlag, setWrongFlag] = useState(false);
    let [currentTaskIndex, setCurrentTaskIndex] = useState(0)
+   const [responseIspraviMe, setResponseIspraviMe] = useState([]);
 
    useEffect(() => {
       const exercise = JSON.parse(localStorage.getItem("exercise"));
@@ -82,32 +83,49 @@ const SolvingDictationTask = ({ idtask, question, audio, nextTask, sendLog }) =>
          context: 'on',
          punctuation: 'off'
       }
+
       axios.post(URL + '/task/proxy-ispravi', data, { withCredentials: false })
          .then(result => {
-            console.log(result.data)
+            console.log(result.data.response.error)
+            const ispraviMeErrors = result.data.response.error
+            setResponseIspraviMe(ispraviMeErrors)
          })
          .catch(err => {
             console.log(err)
          })
-      //sendLog(id, correctFlag, answer1, selectedAnswer)
-      /*if (selectedAnswer === answer1) {
+
+      if (userInput === question) {
          setCorrectFlag(true)
+         sendLog(idtask, true, question, userInput, 'dictation');
          setTimeout(() => {
             setCorrectFlag(false);
          }, 2000);
-         //nextTask();
-      } else {
-         setWrongFlag(true)
-         setTimeout(() => {
-            setWrongFlag(false);
-         }, 2000);
-      }*/
+         nextTask();
+      }else{
+         sendLog(idtask, false, question, userInput, 'dictation');
+      }
    };
 
    const handleSkip = () => {
       sendLog(idtask, false, question, userInput, 'dictation')
       nextTask();
    };
+
+   let i = 0
+   const listDictationErrors = responseIspraviMe.map((error, index) => {
+      const wrongWordIndex = error.position;
+      let endIndex = wrongWordIndex;
+      while (endIndex < userInput.length && userInput[endIndex] !== ' ') {
+         endIndex++;
+      }
+      let wrongWord = userInput.substring(wrongWordIndex, endIndex);
+      wrongWord = wrongWord.replace(/[.!?,]/g, '');
+      return (
+         <div key={i++}>
+            <span style={{ color: 'red' }}>Kriva riječ: </span>{wrongWord} - <span style={{ color: 'green' }}>Ispravna riječ: </span>  {error.suggestions[0]}
+         </div>
+      );
+   });
 
    return (
       <div className='content centerContent'>
@@ -134,6 +152,11 @@ const SolvingDictationTask = ({ idtask, question, audio, nextTask, sendLog }) =>
          <div className="button-container">
             <button className="button" onClick={handleSubmit}>ODGOVORI</button>
          </div>
+         {responseIspraviMe && (
+            <div className="responseContainer">
+               {listDictationErrors}
+            </div>
+         )}
          {
             correctFlag && <div className='correct'>   Točan odgovor   </div>
          }
