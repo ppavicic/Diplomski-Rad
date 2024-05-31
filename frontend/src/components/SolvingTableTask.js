@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5toTouch } from 'react-dnd-multi-backend';
-import MultiBackend from 'react-dnd-multi-backend';
+import { MultiBackend, HTML5DragTransition, TouchTransition } from 'react-dnd-multi-backend';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import "../styles/Exercise.css";
 import "../styles/TableTask.css";
 
@@ -42,6 +43,7 @@ const Column = ({ column, items, onDrop }) => {
 };
 
 const SolvingTableTask = ({ idtask, question, hint, tablejson, nextTask, sendLog }) => {
+  const [draggedItem, setDraggedItem] = useState(null);
   const [columns, setColumns] = useState({});
   const [showHint, setShowHint] = useState(false);
   const [showIncorrectNumber, setShowIncorrectNumber] = useState(false);
@@ -124,7 +126,19 @@ const SolvingTableTask = ({ idtask, question, hint, tablejson, nextTask, sendLog
   };
 
   return (
-    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+    <DndProvider backend={MultiBackend} options={{
+      backends: [
+        {
+          backend: HTML5Backend,
+          transition: HTML5DragTransition,
+        },
+        {
+          backend: TouchBackend,
+          options: { enableMouseEvents: true, enableTouchEvents: true },
+          transition: TouchTransition,
+        },
+      ],
+    }}>
       <div className='content centerContent'>
         <div className='questionContainer'>
           <h2 className='question'>{currentTaskIndex}. {question}</h2>
