@@ -94,7 +94,7 @@ const SolvingDictationTask = ({ idtask, question, audio, nextTask, sendLog }) =>
             console.log(err)
          })
 
-      if (userInput === question) {
+      if (userInput === question || responseIspraviMe.length == 0) {
          setCorrectFlag(true)
          sendLog(idtask, true, question, userInput, 'dictation');
          setTimeout(() => {
