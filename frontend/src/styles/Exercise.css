@@ -42,10 +42,6 @@
     border-color: #bbb;
 }
 
-.dictationInput {
-    width: 100% !important;
-}
-
 .skipBtn {
     background-color: transparent;
     border: none;
@@ -120,18 +116,46 @@
 }
 
 .correct {
-    background-color: #d4edda; 
+    background-color: #d4edda;
     border: 1px solid #a6d8b2;
     color: #5c9c6b;
     border-radius: .25rem;
     font-weight: bold;
     padding: .75rem 1.25rem;
 }
+
 .wrong {
     background-color: #f8d7da;
-    border: 1px solid #f6bec4; 
+    border: 1px solid #f6bec4;
     color: #c96871;
-    border-radius: .25rem; 
+    border-radius: .25rem;
     padding: .75rem 1.25rem;
     font-weight: bold;
+}
+
+.solving-dictation-textarea {
+    width: 90%;
+    min-width: 250px;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.solving-dictation-textarea {
+    border-color: #007bff;
+}
+
+.solving-dictation-textarea {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+@media only screen and (max-width: 1280px) and (max-height: 800px) {
+    .solving-dictation-textarea {
+        height: 200px;
+    }
 }

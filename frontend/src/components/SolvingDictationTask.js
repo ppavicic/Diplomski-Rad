@@ -86,15 +86,19 @@ const SolvingDictationTask = ({ idtask, question, audio, nextTask, sendLog }) =>
 
       axios.post(URL + '/task/proxy-ispravi', data, { withCredentials: false })
          .then(result => {
-            console.log(result.data.response.error)
+            console.log(result.data.response.error.length)
             const ispraviMeErrors = result.data.response.error
+            if(ispraviMeErrors.length === 0){
+               sendLog(idtask, true, question, userInput, 'dictation');
+               nextTask();
+            }
             setResponseIspraviMe(ispraviMeErrors)
          })
          .catch(err => {
             console.log(err)
          })
 
-      if (userInput === question || responseIspraviMe.length == 0) {
+      if (userInput === question) {
          setCorrectFlag(true)
          sendLog(idtask, true, question, userInput, 'dictation');
          setTimeout(() => {
@@ -142,7 +146,7 @@ const SolvingDictationTask = ({ idtask, question, audio, nextTask, sendLog }) =>
                </div>
             </div>
             <textarea
-               className='dictationInput'
+               className='dictationInput solving-dictation-textarea'
                value={userInput}
                onChange={(e) => setUserInput(e.target.value)}
                placeholder="Ovdje unesite odgovor"
