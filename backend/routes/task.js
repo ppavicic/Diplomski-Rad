@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const db = require('../db')
-const fetch = require("node-fetch");
+const http = require('http');
+const https = require('https');
 
 router.post('/save', async function (req, res) {
     try {
@@ -37,35 +38,74 @@ router.post('/save', async function (req, res) {
 
 router.post('/proxy-ispravi', async (req, res) => {
     try {
-        console.log(process.env.ISPRAVI_ME_KEY)
-        const postData = {
+        const queryParams = new URLSearchParams({
             text: req.body.text,
             context: req.body.context,
             punctuation: req.body.punctuation,
             app: process.env.ISPRAVI_ME_KEY
+        }).toString();
+
+        const options = {
+            hostname: 'ispravi.me',
+            path: `/api/ispravi?${queryParams}`,
+            method: 'GET',
         };
 
-        const response = await fetch('https://ispravi.me/api/ispravi', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Accept': '*/*'
-            },
-            body: JSON.stringify(postData)
-        });
-        console.log(response)
+        const proxyReq = http.request(options, (proxyRes) => {
+            let responseData = '';
 
-        if (response.ok) {
-            const responseData = await response.json();
-            res.json(responseData);
-        } else {
-            res.status(response.status).json({ error: 'Proxy Error' });
-        }
+            proxyRes.on('data', (chunk) => {
+                responseData += chunk;
+            });
+
+            proxyRes.on('end', () => {
+                try {
+                    console.log('Response Data:', responseData)
+                    const newUrl = new URL(proxyRes.headers.location);
+                    console.log('URL:' + newUrl.href);
+                    followRedirect(newUrl.href, res);
+                } catch (error) {
+                    console.error('Error parsing response data:', error);
+                    res.status(500).json({ error: 'Failed to parse response data' });
+                }
+            });
+        });
+
+        proxyReq.on('error', (error) => {
+            console.error('Proxy Error:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+
+        proxyReq.end();
     } catch (error) {
         console.error('Proxy Error:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+const followRedirect = (url, res) => {
+    https.get(url, (redirectRes) => {
+        let responseData = '';
+
+        redirectRes.on('data', (chunk) => {
+            responseData += chunk;
+        });
+
+        redirectRes.on('end', () => {
+            try {
+                console.log('Response2: '+ responseData )
+                const parsedData = JSON.parse(responseData);
+                res.json(parsedData);
+            } catch (error) {
+                console.error('Error parsing redirect response data:', error);
+                res.status(500).json({ error: 'Failed to parse redirect response data' });
+            }
+        });
+    }).on('error', (error) => {
+        console.error('Redirect Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    });
+};
 
 router.post('/getTask', async function (req, res) {
     try {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import '../styles/Login.css'
+import '../styles/EditTask.css'
 import { URL } from "./Constants";
 
 function EditTask() {
@@ -91,17 +92,17 @@ function EditTask() {
     };
 
     return (
-        <div className="w-100 d-flex flex-column justify-content-center h-100">
+        <div className="w-100 d-flex flex-column justify-content-center edit-task">
             <nav className="main-navbar">
                 <h2>Uredi zadatak</h2>
-                <button className="button-danger" onClick={handleBack}>NAZAD</button>
+                <button className="logout-button" onClick={handleBack}>NAZAD</button>
             </nav>
 
-            <div>
+            <div className="edit-content">
                 {task && (
                     <>
                         {task.type == "diktat" &&
-                            <div>
+                            <div className="edit-dictation-task">
                                 <h2>DIKTAT</h2>
                                 <div className="input-text">
                                     <label>Tekst za diktat</label>
@@ -109,9 +110,7 @@ function EditTask() {
                                         <textarea
                                             value={dictationText}
                                             onChange={(e) => setDictationText(e.target.value)}
-                                            cols={80}
-                                            rows={20}
-                                            style={{ width: '100%' }}
+                                            className="responsive-dictation-textarea"
                                         />
                                     </div>
                                 </div>
@@ -127,9 +126,7 @@ function EditTask() {
                                         <textarea
                                             value={fillinSentence}
                                             onChange={(e) => setFillinSentence(e.target.value)}
-                                            cols={80}
-                                            rows={5}
-                                            style={{ width: '100%' }}
+                                            className="responsive-fillin-textarea"
                                         />
                                     </div>
                                 </div>
@@ -151,8 +148,7 @@ function EditTask() {
                                         <textarea
                                             value={selectionSentence}
                                             onChange={(e) => setSelectionSentence(e.target.value)}
-                                            cols={80}
-                                            rows={5}
+                                            className="responsive-selection-textarea"
                                             style={{ width: '100%' }}
                                         />
                                     </div>
@@ -173,16 +169,15 @@ function EditTask() {
                         }
 
                         {task.type == "tablica" &&
-                            <div>
-                                <h2>DRAG AND DROP ZADATAK S TABLICOM</h2>
-                                <div className="input-text">
+                            <div className="edit-table">
+                                <h2>ZADATAK S TABLICOM</h2>
+                                <div className="input-text myedit-table">
                                     <label>TABLICA</label>
-                                    <div className="input-container" style={{ width: '40%', height: '20%' }}>
+                                    <div className=" table-textarea-div">
                                         <textarea
                                             value={tablejson}
                                             onChange={(e) => setTablejson(e.target.value)}
-                                            cols={80}
-                                            rows={10}
+                                            className="responsive-table-textarea"
                                             style={{ width: '100%' }}
                                         />
                                     </div>
@@ -192,20 +187,18 @@ function EditTask() {
                     </>
                 )}
 
-                <div className="input-text">
-                    <label>HINT</label>
+                <div className="input-text my-edittask-hint">
+                    <h3>HINT</h3>
                     <div className="input-container" style={{ width: '20%', height: '10%' }}>
                         <textarea
                             value={hint}
                             onChange={(e) => setHint(e.target.value)}
-                            cols={80}
-                            rows={5}
-                            style={{ width: '100%' }}
+                            className="responsive-hint-textarea"
                         />
                     </div>
                 </div>
                 <div className="button-container">
-                    <button type="submit" className="button" onClick={handleSubmit}>Uredi</button>
+                    <button type="submit" style={{marginTop: '10px'}} className="addstudentbutton" onClick={handleSubmit}>Uredi</button>
                 </div>
                 {showErr &&
                     <div className="wrong" style={{ margin: '5px 30%' }}>

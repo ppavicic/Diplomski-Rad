@@ -62,8 +62,8 @@ function EditStudent() {
     return (
         <div className="w-100 d-flex flex-column justify-content-center h-100">
             <nav className="main-navbar">
-                <h2>Uredi zadatak</h2>
-                <button className="button-danger" onClick={handleBack}>NAZAD</button>
+                <h2>Uredi učenika</h2>
+                <button className="logout-button" onClick={handleBack}>NAZAD</button>
             </nav>
             <div>
                 {student && (
@@ -84,7 +84,7 @@ function EditStudent() {
                 )}
             </div>
             <div className="button-container">
-                <button type="submit" className="button" onClick={handleSubmit}>Uredi</button>
+                <button type="submit" className="addstudentbutton" onClick={handleSubmit}>Uredi</button>
             </div>
             {showErr &&
                 <div className="wrong" style={{ margin: '5px 30%' }}>

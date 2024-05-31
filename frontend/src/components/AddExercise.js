@@ -88,7 +88,7 @@ function AddExercise() {
             <td>{task.audio === "undefined" ? "-" : task.audio}</td>
             <td>{task.tablejson === "undefined" ? "-" : task.tablejson}</td>
             <td>
-                <button className="button" onClick={() => handleAddTask(task)}>Dodaj</button>
+                <button className="addbutton" onClick={() => handleAddTask(task)}>Dodaj</button>
             </td>
         </tr>)
 
@@ -105,22 +105,22 @@ function AddExercise() {
             <td>{task.audio === "undefined" ? "-" : task.audio}</td>
             <td>{task.tablejson === "undefined" ? "-" : task.tablejson}</td>
             <td>
-                <button className="button" onClick={() => handleRemoveTask(task.idtask)}>Makni</button>
+                <button className="addbutton" onClick={() => handleRemoveTask(task.idtask)}>Makni</button>
             </td>
         </tr>)
     return (
         <div style={{ height: "100%" }}>
             <nav className="main-navbar">
-                <button className="button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
+                <button className="logout-button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
                 <h2>Stvori novu vježbu</h2>
-                <button className="button" onClick={handleSave}>Spremi</button>
+                <button className="addexercisebutton" onClick={handleSave}>SPREMI</button>
             </nav>
             {error &&
                 <div className="wrong">
                     {errorMsg}
                 </div>}
             <div className="nc-container">
-                <input type="text" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} placeholder="Unesite ime vježbe" />
+                <input type="text" className="addexercise-name-input" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} placeholder="Unesite ime vježbe" />
                 <div className="checkbox-container">
                     <label htmlFor="exerciseCheckbox" className="checkbox-label">Postavi vježbu učenicima za vježbanje:</label>
                     <input type="checkbox" id="exerciseCheckbox" checked={exerciseStart} onChange={() => setExerciseStart(prev => !prev)} />

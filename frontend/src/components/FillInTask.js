@@ -76,8 +76,7 @@ function FillInTask() {
                             value={taskInput}
                             onChange={(e) => setTaskInput(e.target.value)}
                             placeholder="Unesi upit..."
-                            rows={30}
-                            cols={70}
+                            className="responsive-textarea"
                         />
                     </div>
                     <div>

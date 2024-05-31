@@ -122,7 +122,7 @@ function ProfileTeacher() {
             {/*<td>{student.idstudent}</td>*/}
             <td>{student.firstname}</td>
             <td>{student.lastname}</td>
-            <td><button className="button" onClick={() => handleStudent(student.idstudent)}>Uredi</button></td>
+            <td><button className="profilebutton" onClick={() => handleStudent(student.idstudent)}>Uredi</button></td>
         </tr>)
 
     let j = 0
@@ -137,7 +137,7 @@ function ProfileTeacher() {
             <td>{task.answer2 === "undefined" ? "-" : task.answer2}</td>
             <td>{task.audio === "undefined" ? "-" : task.audio}</td>
             <td>{task.tablejson === "undefined" ? "-" : task.tablejson}</td>
-            <td><button className="button" onClick={() => handleTask(task.idtask)}>Uredi</button></td>
+            <td><button className="profilebutton" onClick={() => handleTask(task.idtask)}>Uredi</button></td>
         </tr>)
 
     let k = 0
@@ -147,7 +147,7 @@ function ProfileTeacher() {
             <td>{exercise.name}</td>
             <td>{exercise.start ? 'True' : 'False'}</td>
             <td>{exercise.tasks.join(', ')}</td>
-            <td><button className="button" onClick={() => handleExercise(exercise.idexercise)}>Uredi</button></td>
+            <td><button className="profilebutton" onClick={() => handleExercise(exercise.idexercise)}>Uredi</button></td>
         </tr>)
 
     return (

@@ -60,10 +60,7 @@ function EditExercise() {
             console.error(error);
         }
     };
-    const handleStartChange = (event) => {
-        setStart(event.target.value);
-    };
-
+    
     const handleRemoveTask = (taskId) => {
         setTasks(prevTasks => prevTasks.filter(task => task.idtask !== taskId));
         setTaskIds(prevIds => [...prevIds, taskId]);
@@ -73,7 +70,7 @@ function EditExercise() {
         localStorage.removeItem('exercise');
         navigate("/profileTeacher");
     };
-    
+
     let i = 0
     const listTasks = tasks.map((task) => {
         return (
@@ -99,7 +96,7 @@ function EditExercise() {
         <div>
             <nav className="main-navbar">
                 <h2>Uredi vježbu</h2>
-                <button className="button-danger" onClick={handleBack}>NAZAD</button>
+                <button className="logout-button" onClick={handleBack}>NAZAD</button>
             </nav>
 
             <div className="inputs">
@@ -115,7 +112,7 @@ function EditExercise() {
                 <div className="inputs">
                     <div>
                         <label className="input-title">Odabrat vježbu za rješavanje?</label>
-                        <select value={start} name="pokreni" className="input-container" aria-label="Default select example" onChange={handleStartChange}>
+                        <select value={start} name="pokreni" className="input-container" aria-label="Default select example" onChange={(e) => setStart(e.target.value)}>
                             <option value="true">DA</option>
                             <option value="false">NE</option>
                         </select>
@@ -145,7 +142,7 @@ function EditExercise() {
                 </section>
 
                 <div className="button-container">
-                    <button type="submit" className="button" onClick={handleSubmit}>Uredi</button>
+                    <button type="submit" className="addstudentbutton" onClick={handleSubmit}>Uredi</button>
                 </div>
                 {showErr &&
                     <div className="wrong" style={{ margin: '5px 30%' }}>

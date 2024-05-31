@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/ProfilePage.css";
+import "../styles/AddTask.css";
 import axios from 'axios';
 import { URL } from "./Constants";
 import FillInTask from "./FillInTask";
@@ -32,12 +32,12 @@ function AddTask() {
         <div style={{height:"100%"}}>
             <nav className="main-navbar">
                 <div>
-                    <select value={type} name="type" className="input-container" aria-label="Default select example" onChange={handleTypeChange}>
+                    <select value={type} name="type" className="addtask-input-container" aria-label="Default select example" onChange={handleTypeChange}>
                         {typesList}
                     </select>
                 </div>
                 <h2>Stvori novi zadatak</h2>
-                <button className="button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
+                <button className="logout-button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
             </nav>
             {type === "diktat" && <DictationTask />}
             {type === "nadopuna" && <FillInTask />}

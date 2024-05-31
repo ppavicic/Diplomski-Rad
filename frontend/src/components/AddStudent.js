@@ -88,7 +88,7 @@ function AddStudent() {
         <div style={{ height: '100%' }}>
             <nav className="main-navbar">
                 <h2>Stvori novog učenika</h2>
-                <button className="button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
+                <button className="logout-button" onClick={() => navigate("/profileTeacher")}>NAZAD</button>
             </nav>
             <form onSubmit={handleSubmit} className="inputs">
                 <h2 className="input-text">Unesi ime</h2>
@@ -111,7 +111,7 @@ function AddStudent() {
                     {gradesList}
                 </select>
                 <div className="button-container">
-                    <button className="button">Spremi</button>
+                    <button className="addstudentbutton">Spremi</button>
                 </div>
             </form>
         </div>

@@ -27,14 +27,14 @@ const SolvingFillinTask = ({ idtask, question, hint, fillin, nextTask, sendLog }
    const handleSubmit = () => {
       if (userInput === fillin) {
          setCorrectFlag(true);
-         sendLog(idtask, false, fillin, userInput, 'fillin');
+         sendLog(idtask, true, fillin, userInput, 'fillin');
          setTimeout(() => {
             setCorrectFlag(false);
             nextTask();
          }, 2000);
       } else {
          setWrongFlag(true);
-         sendLog(idtask, true, fillin, userInput, 'fillin');
+         sendLog(idtask, false, fillin, userInput, 'fillin');
          setTimeout(() => {
             setWrongFlag(false);
          }, 2000);
