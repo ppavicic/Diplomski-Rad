@@ -1,0 +1,192 @@
+.responsive-dictation-textarea {
+    width: 100%;
+    min-width: 250px;
+    height: 330px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.responsive-fillin-textarea {
+    width: 100%;
+    min-width: 250px;
+    height: 230px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.responsive-selection-textarea {
+    width: 100%;
+    min-width: 250px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.responsive-hint-textarea {
+    width: 100%;
+    min-width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.responsive-table-textarea {
+    width: 50%;
+    min-width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.responsive-selection-textarea:hover {
+    border-color: #007bff;
+}
+
+.responsive-selection-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.responsive-dictation-textarea:hover {
+    border-color: #007bff;
+}
+
+.responsive-dictation-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.responsive-fillin-textarea:hover {
+    border-color: #007bff;
+}
+
+.responsive-fillin-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.responsive-table-textarea:hover {
+    border-color: #007bff;
+}
+
+.responsive-table-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.responsive-hint-textarea:hover {
+    border-color: #007bff;
+}
+
+.responsive-hint-textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.edit-task {
+    height: 100%;
+}
+
+.my-edittask-hint {
+    height: 30%;
+}
+
+.table-textarea-div {
+    height: 45%;
+    display: flex;
+    align-items: center;
+    margin: 10px 30%;
+    background: #f0f0f0;
+    border-radius: 6px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+@media only screen and (max-width: 1280px) and (max-height: 800px) {
+    .responsive-dictation-textarea {
+        height: 130px;
+        margin-bottom: 10px;
+    }
+
+    .responsive-fillin-textarea {
+        height: 40px;
+    }
+
+    .responsive-selection-textarea {
+        height: 40px;
+    }
+
+    .responsive-table-textarea {
+        height: 100%;
+    }
+
+    .responsive-hint-textarea {
+        height: 50px;
+    }
+
+    .edit-content {
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .edit-dictation-task {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .edit-table {
+        height: 100%;
+    }
+
+    .myedit-table {
+        height: 100%;
+    }
+
+    .table-textarea-div {
+        height: 60%;
+        margin: 10px 10%;
+    }
+}
+
+@media only screen and (max-height: 500px) {
+
+    .responsive-dictation-textarea {
+        height: 60px;
+        margin-top: 50px;
+    }
+
+    .responsive-hint-textarea {
+        margin-bottom: 20px;
+    }
+
+    .responsive-table-textarea {
+        height: 60px;
+    }
+
+    .edit-content {
+        height: 100%;
+    }
+
+    .table-textarea-div {
+        height: 45%;
+    }
+}

@@ -194,3 +194,63 @@ input[type="submit"] {
 .redirect-button:hover {
   background-color: #dcdcdc;
 }
+
+
+
+@media only screen and (max-width: 1280px) and (max-height: 800px) {
+  .app{
+    height: auto;
+  }
+
+  .container {
+    width: 90%;
+    padding: 0; /* Remove padding */
+    box-shadow: none; /* Remove box-shadow */
+    background: antiquewhite;
+  }
+
+  .login-form {
+    width: 50%;
+    padding: 1rem; /* Reduce padding */
+  }
+
+  .title {
+    font-size: 25px; /* Reduce font size */
+    margin-top: 5px;
+  }
+
+  .input-container {
+    width: 350px !important;
+    height: 45px !important;
+    font-size: 14px;
+  }
+
+  .input-container input {
+    width: 100%;
+    height: 31px !important;
+    font-size: 14px;
+  }
+
+  .input-title {
+    font-size: 16px;
+  }
+
+  .button {
+    width: 80%;
+    height: 50px;
+    padding: 10px 20px;
+    margin-bottom: 5px;
+  }
+
+  
+
+  .title-image {
+    width: 70%;
+    height: auto;
+  }
+
+  .title-container {
+    padding: 0.5rem;
+    height: 15%;
+  }
+}

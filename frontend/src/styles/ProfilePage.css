@@ -149,3 +149,105 @@ body {
 .students-section tbody tr:hover {
     background-color: #ddd;
 }
+
+.profilebutton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+@media only screen and (max-width: 1280px) and (max-height: 800px) {
+    .main-navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        height: auto;
+    }
+
+    .main-navbar span {
+        order: 2;
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    .sidebar-navbar {
+        width: auto;
+        height: auto;
+        position: relative;
+        border-radius: 10px;
+    }
+
+    .move-right {
+        transform: translateX(0);
+    }
+
+    .content {
+        padding: 10px;
+        gap: 10px;
+        font-size: large;
+    }
+
+    .tasks-section,
+    .exercises-section,
+    .students-section {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .toggle-sidebar-button {
+        width: 25%;
+        height: 60px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: lightgray;
+        font-size: 20px;
+    }
+
+    .option-button {
+        height: 55px;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    .logout-button {
+        width: 50%;
+        height: 55px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: red;
+        font-size: 20px;
+    }
+
+    .grade-select {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .input-container {
+        width: 100%;
+    }
+
+    .tasks-section table,
+    .exercises-section table,
+    .students-section table {
+        font-size: 15px;
+    }
+
+    .tasks-section th,
+    .exercises-section th,
+    .students-section th {
+        padding: 4px;
+    }
+
+    .tasks-section td,
+    .exercises-section td,
+    .students-section td {
+        padding: 4px;
+    }
+}
